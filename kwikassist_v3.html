@@ -296,8 +296,8 @@ button,input,select,textarea{font-family:var(--font)}
     <div class="nav-item active" id="nav-dashboard" onclick="showTab('dashboard',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".4"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".4"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".4"/></svg>My Integration</div>
     <div class="nav-item" id="nav-creds" onclick="showTab('creds',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Credentials</div>
     <div class="nav-item" id="nav-docs" onclick="showTab('docs',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><path d="M4 2h6l3 3v9H4V2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M10 2v3h3" stroke="currentColor" stroke-width="1.3"/><path d="M6 8h4M6 11h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>Documents</div>
-    <div class="nav-item" id="nav-kwikpass" onclick="showTab('kwikpass',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5M8 5.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>KwikPass Docs<span style="margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></span></div>
-    <div class="nav-item" id="nav-apiref" onclick="showTab('apiref',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><path d="M5 5l-3 3 3 3M11 5l3 3-3 3M9.5 3l-3 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>API Reference</div>
+
+
     <div class="nav-item" id="nav-faq" onclick="showTab('faq',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 6.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5c0 .8-1 1.3-1.5 1.7V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11" r=".7" fill="currentColor"/></svg>FAQ &amp; Help</div>
     <div class="nav-label" style="margin-top:6px">Developer Tools</div>
     <div class="nav-item" id="nav-validator" onclick="showTab('validator',this)"><svg class="nav-ico" viewBox="0 0 16 16" fill="none"><path d="M2 2h12v10a1 1 0 01-1 1H3a1 1 0 01-1-1V2z" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Merchant Validator</div>
@@ -388,7 +388,18 @@ button,input,select,textarea{font-family:var(--font)}
     </div>
     <div id="mt-links-body" style="display:none">
       <div class="fg"><label>BRD Document Link</label><div style="display:grid;grid-template-columns:1fr auto;gap:8px"><input class="fi" id="f-brd" placeholder="Google Drive / Confluence URL"><label style="background:var(--bg4);border:1.5px solid var(--border2);border-radius:8px;padding:9px 14px;cursor:pointer;font-size:12.5px;color:var(--text2);white-space:nowrap" onmouseover="this.style.borderColor='var(--acc)'" onmouseout="this.style.borderColor='var(--border2)'">&#128206; Upload<input type="file" accept=".pdf,.xlsx,.xls,.doc,.docx,image/*" style="display:none" onchange="handleBRDUpload(this)"></label></div><div id="brd-upload-st" style="display:none;font-size:11.5px;color:var(--green);margin-top:4px"></div></div>
-      <div class="fg"><label>API Documentation Link</label><input class="fi" id="f-apidoc" placeholder="Custom API docs URL"></div>
+      <div class="fg">
+        <label>API Documentation <span style="font-size:10px;background:var(--blue-dim);color:var(--blue);padding:2px 7px;border-radius:10px;font-weight:600;margin-left:4px">Merchant sees under Documents</span></label>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:8px">
+          <input class="fi" id="f-apidoc" placeholder="Paste URL — or upload a file">
+          <label style="background:var(--bg4);border:1.5px solid var(--border2);border-radius:8px;padding:9px 14px;cursor:pointer;font-size:12.5px;color:var(--text2);white-space:nowrap;display:flex;align-items:center;gap:5px" onmouseover="this.style.borderColor='var(--acc)'" onmouseout="this.style.borderColor='var(--border2)'">
+            &#128206; Upload
+            <input type="file" accept=".pdf,.xlsx,.xls,.doc,.docx,image/*" style="display:none" onchange="handleApiDocUpload(this)">
+          </label>
+        </div>
+        <div id="apidoc-upload-status" style="display:none;font-size:11.5px;color:var(--green);margin-top:4px"></div>
+        <div style="font-size:11px;color:var(--text3);margin-top:3px">Upload a file (PDF/Doc/Image) or paste a URL. Merchant sees it in Documents.</div>
+      </div>
       <div class="fg"><label>Postman Collection</label><input class="fi" id="f-postman" placeholder="Postman URL"></div>
     </div>
     <div id="mt-dates-body" style="display:none">
@@ -549,9 +560,9 @@ function viewMerchant(id){user={type:'merchant',id:id};saveSession();navHistory=
 function adminJumpStage(mid,ts){var bb=document.getElementById('tb-back-btn');if(!bb||bb.style.display==='none'){showToast('Admin only');return;}var m=getM(mid);if(!m||ts===m.stage)return;m.stage=ts;if(taskState[mid])delete taskState[mid][ts];saveMerchants();syncEnvBadges(m);document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ts+1)+': '+STAGES[ts].n);}
 function showAdminBar(){var bar=document.getElementById('admin-stage-bar');if(!bar)return;var bb=document.getElementById('tb-back-btn');bar.style.display=(bb&&bb.style.display!=='none')?'flex':'none';}
 function openAdd(){editId=null;document.getElementById('m-title').textContent='Add New Project';document.getElementById('m-save-btn').textContent='Add Project';clearForm();document.getElementById('f-d1').value=new Date().toISOString().split('T')[0];setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
-function openEdit(id){editId=id;var m=getM(id);document.getElementById('m-title').textContent='Edit Project';document.getElementById('m-save-btn').textContent='Save Changes';document.getElementById('f-name').value=m.name||'';document.getElementById('f-mid').value=m.mid||'';document.getElementById('f-platform').value=m.platform||'Custom';document.getElementById('f-category').value=m.category||'';document.getElementById('f-arr').value=m.arr||'';document.getElementById('f-txns').value=m.txns||'';document.getElementById('f-aov').value=m.aov||'';document.getElementById('f-spoc').value=m.spoc||'';document.getElementById('f-inttype').value=m.intType||'Checkout Advanced';document.getElementById('f-pg').value=m.pg||'';document.getElementById('f-owner').value=m.owner||'';document.getElementById('f-stage').value=m.stage||0;document.getElementById('f-url').value=m.url||'';document.getElementById('f-brd').value=m.brd||'';document.getElementById('f-apidoc').value=m.apidoc||'';document.getElementById('f-postman').value=m.postman||'';document.getElementById('f-d1').value=m.d1||'';document.getElementById('f-d2').value=m.d2||'';document.getElementById('f-sla').value=m.sla||'';document.getElementById('f-configid').value=m.configId||'';document.getElementById('f-kpprodkey').value=m.kpProdKey||'';document.getElementById('f-sb-mid').value=m.sb.mid||'';document.getElementById('f-sb-app').value=m.sb.app||'';document.getElementById('f-sb-sec').value=m.sb.sec||'';document.getElementById('f-sb-url').value=m.sb.url||'';document.getElementById('f-pr-mid').value=m.prod.mid||'';document.getElementById('f-pr-app').value=m.prod.app||'';document.getElementById('f-pr-sec').value=m.prod.sec||'';document.getElementById('f-pr-url').value=m.prod.url||'';_currentApiList=(m.apiList||[]).slice();document.getElementById('f-notes').value=m.notes||'';document.getElementById('f-se-email').value=m.seEmail||'';document.getElementById('f-merch-email').value=m.mEmail||'';brdFileData=m.brdFile||null;brdFileType=m.brdFileType||null;var bs=document.getElementById('brd-upload-st');if(bs){bs.style.display=m.brdFile?'block':'none';bs.textContent=m.brdFile?'File uploaded':'';}setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
-function clearForm(){['f-name','f-mid','f-category','f-arr','f-txns','f-aov','f-spoc','f-pg','f-owner','f-url','f-brd','f-apidoc','f-postman','f-d1','f-d2','f-sla','f-configid','f-kpprodkey','f-sb-mid','f-sb-app','f-sb-sec','f-pr-mid','f-pr-app','f-pr-sec','f-notes','f-se-email','f-merch-email'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});document.getElementById('f-sb-url').value='https://sandbox.api.gokwik.co';document.getElementById('f-pr-url').value='https://api.gokwik.co';document.getElementById('f-platform').value='Custom';document.getElementById('f-inttype').value='Checkout Advanced';document.getElementById('f-stage').value='0';brdFileData=null;brdFileType=null;_currentApiList=[];}
-function saveMerchant(){var name=document.getElementById('f-name').value.trim(),mid=document.getElementById('f-mid').value.trim();if(!name){showToast('Name required');return;}if(!mid){showToast('MID required');return;}var d={name:name,mid:mid,platform:document.getElementById('f-platform').value,category:document.getElementById('f-category').value,arr:document.getElementById('f-arr').value,txns:+document.getElementById('f-txns').value||0,aov:+document.getElementById('f-aov').value||0,spoc:document.getElementById('f-spoc').value,intType:document.getElementById('f-inttype').value,pg:document.getElementById('f-pg').value,stage:+document.getElementById('f-stage').value,owner:document.getElementById('f-owner').value,url:document.getElementById('f-url').value,brd:document.getElementById('f-brd').value,apidoc:document.getElementById('f-apidoc').value,postman:document.getElementById('f-postman').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,sla:+document.getElementById('f-sla').value||30,configId:document.getElementById('f-configid').value.trim(),kpProdKey:document.getElementById('f-kpprodkey').value.trim(),sb:{mid:document.getElementById('f-sb-mid').value||mid,app:document.getElementById('f-sb-app').value,sec:document.getElementById('f-sb-sec').value,url:document.getElementById('f-sb-url').value},prod:{mid:document.getElementById('f-pr-mid').value,app:document.getElementById('f-pr-app').value,sec:document.getElementById('f-pr-sec').value,url:document.getElementById('f-pr-url').value},notes:document.getElementById('f-notes').value,apiList:getSelectedApiList(),seEmail:document.getElementById('f-se-email').value,mEmail:document.getElementById('f-merch-email').value};if(brdFileData){d.brdFile=brdFileData;d.brdFileType=brdFileType;}if(editId){var i=merchants.findIndex(function(m){return m.id===editId;});merchants[i]=Object.assign(merchants[i],d);showToast('Project updated!');}else{d.id='M'+Date.now();d.createdAt=new Date().toISOString().split('T')[0];merchants.unshift(d);showToast('Project added!');}saveMerchants();brdFileData=null;brdFileType=null;closeModal('m-modal');renderStats();renderMerchants();renderStagePills();}
+function openEdit(id){editId=id;var m=getM(id);document.getElementById('m-title').textContent='Edit Project';document.getElementById('m-save-btn').textContent='Save Changes';document.getElementById('f-name').value=m.name||'';document.getElementById('f-mid').value=m.mid||'';document.getElementById('f-platform').value=m.platform||'Custom';document.getElementById('f-category').value=m.category||'';document.getElementById('f-arr').value=m.arr||'';document.getElementById('f-txns').value=m.txns||'';document.getElementById('f-aov').value=m.aov||'';document.getElementById('f-spoc').value=m.spoc||'';document.getElementById('f-inttype').value=m.intType||'Checkout Advanced';document.getElementById('f-pg').value=m.pg||'';document.getElementById('f-owner').value=m.owner||'';document.getElementById('f-stage').value=m.stage||0;document.getElementById('f-url').value=m.url||'';document.getElementById('f-brd').value=m.brd||'';document.getElementById('f-apidoc').value=m.apidoc||'';document.getElementById('f-postman').value=m.postman||'';document.getElementById('f-d1').value=m.d1||'';document.getElementById('f-d2').value=m.d2||'';document.getElementById('f-sla').value=m.sla||'';document.getElementById('f-configid').value=m.configId||'';document.getElementById('f-kpprodkey').value=m.kpProdKey||'';document.getElementById('f-sb-mid').value=m.sb.mid||'';document.getElementById('f-sb-app').value=m.sb.app||'';document.getElementById('f-sb-sec').value=m.sb.sec||'';document.getElementById('f-sb-url').value=m.sb.url||'';document.getElementById('f-pr-mid').value=m.prod.mid||'';document.getElementById('f-pr-app').value=m.prod.app||'';document.getElementById('f-pr-sec').value=m.prod.sec||'';document.getElementById('f-pr-url').value=m.prod.url||'';_currentApiList=(m.apiList||[]).slice();document.getElementById('f-notes').value=m.notes||'';document.getElementById('f-se-email').value=m.seEmail||'';document.getElementById('f-merch-email').value=m.mEmail||'';brdFileData=m.brdFile||null;brdFileType=m.brdFileType||null;window._origCreds={sb:JSON.parse(JSON.stringify(m.sb||{})),prod:JSON.parse(JSON.stringify(m.prod||{})),kpProdKey:m.kpProdKey||''};var bs=document.getElementById('brd-upload-st');if(bs){bs.style.display=m.brdFile?'block':'none';bs.textContent=m.brdFile?'File uploaded':'';}setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
+function clearForm(){['f-name','f-mid','f-category','f-arr','f-txns','f-aov','f-spoc','f-pg','f-owner','f-url','f-brd','f-apidoc','f-postman','f-d1','f-d2','f-sla','f-configid','f-kpprodkey','f-sb-mid','f-sb-app','f-sb-sec','f-pr-mid','f-pr-app','f-pr-sec','f-notes','f-se-email','f-merch-email'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});document.getElementById('f-sb-url').value='https://sandbox.api.gokwik.co';document.getElementById('f-pr-url').value='https://api.gokwik.co';document.getElementById('f-platform').value='Custom';document.getElementById('f-inttype').value='Checkout Advanced';document.getElementById('f-stage').value='0';brdFileData=null;brdFileType=null;window._apiDocData=null;_currentApiList=[];}
+function saveMerchant(){var name=document.getElementById('f-name').value.trim(),mid=document.getElementById('f-mid').value.trim();if(!name){showToast('Name required');return;}if(!mid){showToast('MID required');return;}var d={name:name,mid:mid,platform:document.getElementById('f-platform').value,category:document.getElementById('f-category').value,arr:document.getElementById('f-arr').value,txns:+document.getElementById('f-txns').value||0,aov:+document.getElementById('f-aov').value||0,spoc:document.getElementById('f-spoc').value,intType:document.getElementById('f-inttype').value,pg:document.getElementById('f-pg').value,stage:+document.getElementById('f-stage').value,owner:document.getElementById('f-owner').value,url:document.getElementById('f-url').value,brd:document.getElementById('f-brd').value,apidoc:document.getElementById('f-apidoc').value,postman:document.getElementById('f-postman').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,sla:+document.getElementById('f-sla').value||30,configId:document.getElementById('f-configid').value.trim(),kpProdKey:(function(){var v=document.getElementById('f-kpprodkey').value.trim();return v||(editId&&window._origCreds?window._origCreds.kpProdKey:'');}()),sb:(function(){var oc=(editId&&window._origCreds)?window._origCreds.sb:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-sb-mid')||(oc.mid||mid),app:fv('f-sb-app')||(oc.app||''),sec:fv('f-sb-sec')||(oc.sec||''),url:fv('f-sb-url')||(oc.url||'https://sandbox.api.gokwik.co')};}()),prod:(function(){var oc2=(editId&&window._origCreds)?window._origCreds.prod:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-pr-mid')||(oc2.mid||''),app:fv('f-pr-app')||(oc2.app||''),sec:fv('f-pr-sec')||(oc2.sec||''),url:fv('f-pr-url')||(oc2.url||'https://api.gokwik.co')};}()),notes:document.getElementById('f-notes').value,apidoc:(window._apiDocData||'').length>0?window._apiDocData:document.getElementById('f-apidoc').value.trim(),apiList:getSelectedApiList(),seEmail:document.getElementById('f-se-email').value,mEmail:document.getElementById('f-merch-email').value};if(brdFileData){d.brdFile=brdFileData;d.brdFileType=brdFileType;}if(editId){var i=merchants.findIndex(function(m){return m.id===editId;});merchants[i]=Object.assign(merchants[i],d);showToast('Project updated!');}else{d.id='M'+Date.now();d.createdAt=new Date().toISOString().split('T')[0];merchants.unshift(d);showToast('Project added!');}saveMerchants();brdFileData=null;brdFileType=null;closeModal('m-modal');renderStats();renderMerchants();renderStagePills();}
 function setMT(t,el){
   document.querySelectorAll('.mtab').forEach(function(x){x.classList.remove('on');});el.classList.add('on');
   ['info','links','dates','creds','notes'].forEach(function(x){document.getElementById('mt-'+x+'-body').style.display=x===t?'block':'none';});
@@ -605,7 +616,7 @@ function showTab(tab,el,skipH){
   var m=getM(user.id);var main=document.getElementById('portal-main');main.innerHTML='';
   if(navHistory.length>1){var prev=navHistory[navHistory.length-2];var labels={dashboard:'My Integration',creds:'Credentials',docs:'Documents',kwikpass:'KwikPass Docs',apiref:'API Reference',faq:'FAQ & Help',validator:'Merchant Validator',health:'Health Score',emails:'Email Updates'};var bb=document.createElement('div');bb.className='page-back';bb.onclick=function(){navHistory.pop();navHistory.pop();var pt=navHistory[navHistory.length-1]||'dashboard';showTab(pt,document.getElementById('nav-'+pt),true);};bb.innerHTML='<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>'+(labels[prev]||prev)+'</span>';main.appendChild(bb);}
   var div=document.createElement('div');
-  if(tab==='dashboard')div.innerHTML=renderDashboard(m);
+  if(tab==='kwikpass'||tab==='apiref'){tab='docs';document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});var nd=document.getElementById('nav-docs');if(nd)nd.classList.add('active');}  if(tab==='dashboard')div.innerHTML=renderDashboard(m);
   else if(tab==='creds')div.innerHTML=renderCreds(m);
   else if(tab==='docs')div.innerHTML=renderDocs(m);
   else if(tab==='kwikpass')div.innerHTML=renderKwikPass(m);
@@ -651,7 +662,7 @@ function showMerchantAPIDoc(mid){
   var m=getM(mid);
   if(!m||!m.apiList||!m.apiList.length){showToast('No APIs configured yet');return;}
   // Show filtered API reference
-  showTab('apiref',document.getElementById('nav-apiref'));
+  showTab('apiref',document.getElementById('nav-docs'));
   // Mark which APIs are for this merchant
   setTimeout(function(){
     var main=document.getElementById('portal-main');
@@ -750,20 +761,45 @@ function toggleRev(key,val){revealed[key]=!revealed[key];showTab('creds',documen
 function copyV(val,lbl){navigator.clipboard.writeText(val).catch(function(){});showToast(lbl+' copied!');}
 function switchEnv(e){curEnv=e;showTab('creds',document.getElementById('nav-creds'));}
 function renderDocs(m){
-  var docs=[
-    {t:'BRD Document',s:m.brdFile?'Merchant-specific BRD':m.brd?'Custom BRD link':'Universal GoKwik BRD',i:'&#128196;',bg:'rgba(59,130,246,.12)',avail:true,action:"openBRD('"+m.id+"')"},
-    {t:'API Documentation',s:m.apiList&&m.apiList.length?(m.apiList.length+' APIs selected for you'):'Your API integration guide',i:'&#128216;',bg:'rgba(34,197,94,.1)',avail:!!(m.apidoc||(m.apiList&&m.apiList.length)),action:(m.apidoc?"window.open('"+m.apidoc+"','_blank')":(m.apiList&&m.apiList.length?"showMerchantAPIDoc('"+m.id+"')":'showToast("API docs not yet uploaded — ask your SE")'))},
-    {t:'KwikPass Docs',s:'Full integration guide',i:'&#128272;',bg:'rgba(139,92,246,.12)',avail:true,action:"showTab('kwikpass',document.getElementById('nav-kwikpass'))"},
-    {t:'Postman Collection',s:'All GoKwik APIs',i:'&#128230;',bg:'rgba(245,158,11,.12)',avail:true,action:"window.open('"+(m.postman||POSTMAN_URL)+"','_blank')"},
-  ];
-  return '<div>'
-  +'<div style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(59,130,246,.1));border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px"><div style="font-size:24px;flex-shrink:0">&#128272;</div><div style="flex:1"><div style="font-size:14px;font-weight:700;margin-bottom:2px">KwikPass Integration Guide (Official PDF)</div><div style="font-size:12px;color:var(--text2)">Complete guide &mdash; OTP, SSO, KP Token Decryption</div></div><a href="KwikPass_Integration_Guide.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:var(--acc);color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none">Open PDF</a></div>'
-  +'<div style="margin-bottom:14px"><div style="font-size:19px;font-weight:700;margin-bottom:2px">Documents &amp; Resources</div><div style="font-size:12.5px;color:var(--text2)">Your integration docs. Green = available.</div></div>'
-  +'<div class="docs-grid" style="margin-bottom:16px">'
-  +docs.map(function(d){return '<div class="doc-card" onclick="'+d.action+'"><div style="width:34px;height:34px;border-radius:8px;background:'+d.bg+';display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">'+d.i+'</div><div style="flex:1"><div style="font-size:13px;font-weight:500">'+d.t+'</div><div style="font-size:11.5px;color:var(--text3)">'+d.s+'</div></div><span class="tag '+(d.avail?'tg':'s0')+'" style="font-size:10px">'+(d.avail?'Available':'Pending')+'</span></div>';}).join('')
-  +'</div></div>';
+  var html='<div>';
+  html+='<div style="font-size:19px;font-weight:700;margin-bottom:2px">Documents & Resources</div>';
+  html+='<div style="font-size:12.5px;color:var(--text2);margin-bottom:16px">Click any section to expand.</div>';
+  function sec(icon,title,sub,bc,bt,sid,body){
+    return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden">'
+      +'<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer" onclick="toggleDocSec(\'' +sid+ '\')">'
+      +'<span style="font-size:20px;flex-shrink:0">'+icon+'</span>'
+      +'<div style="flex:1"><div style="font-size:14px;font-weight:700">'+title+'</div>'
+      +'<div style="font-size:12px;color:var(--text2)">'+sub+'</div></div>'
+      +'<span class="tag '+bc+'" style="font-size:10px">'+bt+'</span>'
+      +'<svg id="'+sid+'-arr" width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-left:6px;transition:.2s"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      +'</div>'
+      +'<div id="'+sid+'" style="padding:0 16px 16px;display:none">'+body+'</div>'
+      +'</div>';
+  }
+  var brdBody=m.brdFile
+    ?'<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px"><span style="font-size:18px">&#128196;</span><div style="flex:1;font-size:13px;font-weight:500">Merchant BRD (uploaded by SE)</div><button onclick="openBRD(\'' +m.id+ '\')" class="btn btn-acc btn-sm">Open &#8594;</button></div>'
+    :m.brd?'<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px"><span>&#128279;</span><div style="flex:1;font-size:13px;font-weight:500">BRD Link</div><a href="'+m.brd+'" target="_blank" class="btn btn-acc btn-sm">Open &#8594;</a></div>'
+    :'<div style="background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:12px 14px"><div style="font-size:13px;font-weight:600;color:var(--blue);margin-bottom:6px">Universal GoKwik BRD</div><div style="font-size:12.5px;color:var(--text2);margin-bottom:8px">Your SE will replace with your merchant-specific BRD.</div><button onclick="openBRD(\'' +m.id+ '\')" class="btn btn-out btn-sm">Open Universal BRD &#8594;</button></div>';
+  html+=sec('&#128196;','BRD Document',m.brdFile?'Merchant BRD':m.brd?'Custom link':'Universal GoKwik BRD',m.brdFile||m.brd?'tg':'tb2',m.brdFile||m.brd?'Available':'Universal','doc-brd',brdBody);
+  var pm=m.postman||'https://documenter.getpostman.com/view/50602298/2sBXiomAJs#ce6c02b2-57bc-4f71-86b9-6967a2dcd0cf';
+  html+=sec('&#128230;','Postman Collection','All GoKwik APIs — import ready','tg','Available','doc-pm','<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:13px;font-weight:600;margin-bottom:8px">GoKwik API Postman Collection</div><div style="font-size:12.5px;color:var(--text2);margin-bottom:10px">Import to test all APIs. Includes checksum scripts.</div><a href="'+pm+'" target="_blank" class="btn btn-acc btn-sm">Open in Postman &#8594;</a></div>');
+  var apiBody='';
+  if(m.apidoc){var isFile=m.apidoc.startsWith('data:');apiBody+='<div style="background:var(--bg4);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:18px">&#128196;</span><div style="flex:1;font-size:13px;font-weight:500">'+(isFile?'API Doc (uploaded)':'API Doc Link')+'</div>';if(isFile){apiBody+='<a href="'+m.apidoc+'" download="API_Documentation" class="btn btn-acc btn-sm">&#128196; Download &#8594;</a>';}else{apiBody+='<a href="'+m.apidoc+'" target="_blank" class="btn btn-acc btn-sm">Open &#8594;</a>';}apiBody+='</div>';}
+  if(m.apiList&&m.apiList.length){apiBody+='<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px">'+m.apiList.length+' APIs to build (selected by SE):</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';m.apiList.forEach(function(id){apiBody+='<span style="background:var(--acc-dim);color:var(--acc);font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:monospace">/'+id+'</span>';});apiBody+='</div><button class="btn btn-acc btn-sm" onclick="showMerchantAPIDoc(\'' +m.id+ '\')">View My API Reference &#8594;</button></div>';}else if(!m.apidoc){apiBody='<div style="font-size:12.5px;color:var(--text3);font-style:italic;padding:8px 0">Your SE will configure this after your API Walkthrough.</div>';}
+  html+=sec('&#128216;','API Documentation',m.apiList&&m.apiList.length?m.apiList.length+' APIs selected':m.apidoc?'Doc uploaded':'Configured by SE',m.apiList&&m.apiList.length||m.apidoc?'tg':'s0',m.apiList&&m.apiList.length||m.apidoc?'Available':'Pending','doc-api',apiBody);
+  var kpBody='<div style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(59,130,246,.1));border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px"><div style="flex:1"><div style="font-size:13px;font-weight:700;margin-bottom:2px">Official PDF</div><div style="font-size:12px;color:var(--text2)">Complete KwikPass Guide for Custom Headless Stores</div></div><a href="KwikPass_Integration_Guide.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:var(--acc);color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none;flex-shrink:0">&#128196; Download</a></div>';
+  kpBody+=renderKwikPass(m,true);
+  html+=sec('&#128273;','KwikPass Integration Guide','OTP, SSO, KP Token — all 7 steps with code','tg','&#10003; Official','doc-kp',kpBody);
+  html+='</div>';return html;
 }
-function renderKwikPass(m){
+function toggleDocSec(id){
+  var el=document.getElementById(id),arr=document.getElementById(id+'-arr');
+  if(!el)return;
+  var isOpen=el.style.display!=='none';
+  el.style.display=isOpen?'none':'block';
+  if(arr)arr.style.transform=isOpen?'rotate(0)':'rotate(180deg)';
+}
+function renderKwikPass(m,skipHeader){
   var prodKey=m&&m.kpProdKey?m.kpProdKey:null;
   var sbKey='zH4NRP1HMALxxCFnRZABFA7GOJtzU_gIj02alfL1lvI';
   var _pid=0;
@@ -823,15 +859,17 @@ function renderKwikPass(m){
 
   var html='<div>';
 
-  // Header
+  // Header (suppressed when embedded in docs accordion)
+  if(!skipHeader){
   html+='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:4px">'
     +'<div style="font-size:19px;font-weight:700">KwikPass Integration Guide</div>'
     +'<span style="background:var(--green-dim);color:var(--green);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;border:1px solid rgba(34,197,94,.3)">&#10003; Official GoKwik Doc</span>'
     +'</div>';
   html+='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">'
     +'<div style="font-size:12.5px;color:var(--text2)">Custom Headless Store &mdash; verified against official KwikPass documentation</div>'
-    +'<a href="KwikPass_Integration_Guide.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--acc);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none">&#128196; View PDF</a>'
+    +'<a href="KwikPass_Integration_Guide.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--acc);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none">&#128196; Download PDF</a>'
     +'</div>';
+  }
 
   // Overview
   html+='<div class="info-card" style="margin-bottom:20px"><div class="ic-title">What KwikPass Enables</div>'
@@ -1300,96 +1338,35 @@ function findBestMatch(text){
 }
 
 
-// ── STATIC KNOWLEDGE BASE ──
-var KB={
-  'why-get-cart':{q:'Why do I need to build the get-cart API?',a:'<p><strong>get-cart is MANDATORY</strong> — GoKwik has zero knowledge of your cart without it.</p><ul><li>GoKwik cannot calculate payment amount, show items, or process checkout without cart data</li><li>The SDK calls your /get-cart when checkout opens to sync your cart state</li><li>Missing subtotal, total, or items in response = checkout crashes</li></ul><pre>// Minimum required response:\n{\n  "subtotal": 2000,\n  "total": 1900,\n  "items": [...]\n}</pre>'},
-  'get-cart':{q:'How does get-cart work?',a:'<p><strong>POST /get-cart</strong> — MANDATORY.</p><pre>Request: { "cart_id": "your_cart_id" }</pre><p>Must return: subtotal, total, items (mandatory) + optional payment methods, coupons, shipping.</p>'},
-  'checkout-lite-apis':{q:'APIs for Checkout Lite?',a:'<p><strong>4 mandatory APIs:</strong></p><pre>1. /check-order-exists\n2. /get-cart\n3. /set-shipping-address\n4. /place-order</pre>'},
-  'checkout-adv-apis':{q:'APIs for Checkout Advanced?',a:'<p><strong>Mandatory:</strong> check-order-exists, get-cart, set-shipping-address, place-order, v3/orders/update</p><p><strong>Optional:</strong> set-shipping-option, discounts, get-user, wallet, membership, inventory, create-order</p>'},
-  'sequence':{q:'API call sequence?',a:'<pre>1. check-order-exists\n2. get-cart\n3. set-shipping-address\n4. set-shipping-option (optional)\n5. apply-discount (optional)\n6. [Payment Gateway]\n7. place-order</pre>'},
-  'place-order':{q:'Place Order payload?',a:'<pre>POST /place-order\n{\n  "cart_id": "cart123",\n  "payment_details": {\n    "payment_method": "prepaid",\n    "payment_amount": 1900,\n    "payment_id": "PAY_abc",\n    "payment_instrument": "upi",\n    "pg_payment_trnx_id": "PG_xyz"\n  },\n  "shipping_address": { first_name, phone, email, address, pincode, city, state },\n  "meta_data": { gokwik_order_id, rto_risk_flag }\n}</pre>'},
-  '403':{q:'Why 403 Forbidden?',a:'<ul><li><strong>Domain not whitelisted</strong> — Dashboard &rarr; Domains</li><li><strong>Invalid checksum</strong> — recompute HMAC-SHA256</li><li><strong>Wrong MID</strong> — check x-gk-merchant-id header</li><li><strong>Sandbox/Prod mismatch</strong></li></ul>'},
-  'checksum':{q:'How to compute checksum?',a:'<pre>// Node.js\nconst checksum = crypto.createHmac("sha256", APP_SECRET)\n  .update(JSON.stringify(body)).digest("hex");\n\n// PHP\n$checksum = hash_hmac("sha256", json_encode($body), $secret);\n\n// Python\nchecksum = hmac.new(secret.encode(), json.dumps(body).encode(), hashlib.sha256).hexdigest()</pre>'},
-  'ppcod':{q:'How does PPCOD work?',a:'<pre>"payment_details": {\n  "payment_method": "pp-cod",\n  "payment_instrument": "upi",  // ALWAYS upi for PPCOD\n  "payment_amount": 1900\n},\n"meta_data": {\n  "ppcod": { "prepaid_amount": "500", "payable_on_delivery": "1400" }\n}</pre>'},
-  'mandatory-apis':{q:'Which APIs are mandatory?',a:'<ul><li>/get-cart</li><li>/set-shipping-address</li><li>/place-order</li><li>/check-order-exists (uses session_key)</li><li>/v3/orders/update (uses gk-app-id/secret headers)</li></ul>'},
-  'rto':{q:'How to handle RTO?',a:'<pre>POST /v3/orders/update\n// Different headers: gk-app-id + gk-app-secret\n{\n  "merchant_order_id": "ORD123",\n  "order_status": "Cancelled",\n  "awb_number": "AWB001",\n  "awb_status": "RTO",\n  "shipping_provider": "Delhivery"\n}</pre>'},
-  'kwikpass':{q:'KwikPass integration steps?',a:'<ol><li>Add window.merchantInfo with MID (before all KwikPass scripts)</li><li>Load KwikPass SDK JS</li><li>Call kpSendOTP(phone)</li><li>Call kpVerifyOTP({phone, otp})</li><li>Decrypt kpToken server-side with secret key</li><li>Call handleKPLogout() on every logout</li></ol>'},
-  'discount':{q:'Apply Discount API?',a:'<p><strong>ALWAYS returns HTTP 200 — always check invalid_coupon field!</strong></p><pre>if (response.invalid_coupon) {\n  // coupon rejected\n} else {\n  // applied successfully\n}</pre>'},
-  'wallet':{q:'Wallet credit API?',a:'<pre>POST /apply-wallet-credit\n{ "cart_id": "cart123", "customer_phone": "9999999999" }</pre><p>Call /get-user first to check wallet balance.</p>'},
-  'lite-adv':{q:'Checkout Lite vs Advanced?',a:'<p><strong>Lite:</strong> Redirect to GoKwik page, 1-2 days, 4 APIs, GoKwik UI.</p><p><strong>Advanced:</strong> Build your own UI, 5-7 days, full control, wallet/membership/PPCOD.</p>'},
-  'skip-create-order':{q:'Can I skip create-order?',a:'<p><strong>Yes — completely optional.</strong> place-order handles both create and confirm in one step if you skip it.</p>'},
-  'headers':{q:'Mandatory headers?',a:'<pre>// Checkout APIs:\nx-gk-checksum:    HMAC-SHA256 of request body\nx-gk-merchant-id: YOUR_MID\ncontent-type:     application/json\n\n// /v3/orders/update uses DIFFERENT headers:\ngk-app-id:     YOUR_APP_ID\ngk-app-secret: YOUR_APP_SECRET\ncontent-type:  application/json</pre>'},
-};
-var GENERIC=[
-  '<p>I can help! Try asking more specifically:<ul><li>"Why do I need the get-cart API?"</li><li>"What APIs for Checkout Lite?"</li><li>"How does PPCOD work?"</li><li>"Why am I getting 403?"</li></ul></p>',
-  '<p>Common checklist: &#10003; Domain whitelisted? &#10003; Checksum fresh per request? &#10003; check-order-exists before place-order?</p>',
-  '<p>Tap a chip below for instant answers on common topics.</p>'
-];
-var gi=0;
-
-async function qAsk(k){
-  var a=KB[k];if(!a)return;
-  setCTab('chat',document.getElementById('ctab-chat'));
-  addU(a.q);showTyping();
-  var apiKey=sessionStorage.getItem('claude_api_key');
-  if(apiKey){var ai=await callClaudeAPI(a.q);hideTyping();if(ai){addB(ai);return;}}
-  setTimeout(function(){hideTyping();addB(a.a);},400);
+function handleApiDocUpload(inp){
+  var f=inp.files[0];if(!f)return;
+  if(f.size>5*1024*1024){showToast('Max 5MB');return;}
+  var r=new FileReader();r.onload=function(e){window._apiDocData=e.target.result;window._apiDocType=f.type;var s=document.getElementById('apidoc-upload-status');if(s){s.style.display='block';s.textContent='\u2705 '+f.name+' ready';}var inp2=document.getElementById('f-apidoc');if(inp2){inp2.value='';inp2.placeholder='File: '+f.name;}};r.readAsDataURL(f);
 }
-async function sendMsg(){
-  var inp=document.getElementById('chat-inp');
-  var t=inp.value.trim();if(!t)return;inp.value='';inp.style.height='';
-  addU(t);showTyping();
-  var apiKey=sessionStorage.getItem('claude_api_key');
-  if(apiKey){var ai=await callClaudeAPI(t);hideTyping();if(ai){addB(ai);return;}}
-  var k=findBestMatch(t);
-  hideTyping();
-  if(k&&KB[k])addB(KB[k].a);
-  else{addB(GENERIC[gi%GENERIC.length]);gi++;}
-}
+var MERCHANT_EMAILS={'M001':{merchantDomain:'balwaan.com',threads:[{id:'19c227cd8aa88af4',subject:'Balwaan x GoKwik | MOM & Next Steps \u2013 Technical Scoping',dateRange:'Feb 3 \u2013 Mar 27, 2026',messageCount:24,statusLabel:'Action on Merchant',status:'action_needed',latestDate:'Mar 27, 2026',latestFrom:'Sourav Sharma (Balwaan)',latestSummary:'We will resolve all issues at the earliest. Our team is available at 3:30 PM today for the dashboard walkthrough. The Bajaj Finserv EMI option will be required from Day 1 of Go Live \u2014 it was missing during production testing.',context:'Main integration thread \u2014 MOM, API building, UAT session, and open issues from production testing.'}]}};
+function renderEmails(m){var data=MERCHANT_EMAILS[m.id];var html='<div><div style="font-size:19px;font-weight:700;margin-bottom:2px">Email Updates</div><div style="font-size:12.5px;color:var(--text2);margin-bottom:14px">Emails from your GoKwik integration thread. Click to open in Gmail.</div>';if(data&&data.merchantDomain)html+='<div style="display:inline-flex;align-items:center;gap:5px;background:var(--blue-dim);color:var(--blue);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:14px;border:1px solid rgba(59,130,246,.2)">Filtered: @'+data.merchantDomain+' only</div>';if(!data||!data.threads||!data.threads.length){html+='<div class="info-card" style="text-align:center;padding:40px"><div style="font-size:36px;margin-bottom:10px">&#128235;</div><div style="font-size:15px;font-weight:600">No threads yet</div></div></div>';return html;}data.threads.forEach(function(t){var gu='https://mail.google.com/mail/u/0/#all/'+t.id;var sc=t.status==='action_needed'?'var(--acc)':t.status==='waiting_gokwik'?'var(--blue)':'var(--green)';var sb=t.status==='action_needed'?'var(--acc-dim)':t.status==='waiting_gokwik'?'var(--blue-dim)':'var(--green-dim)';var fm=t.latestFrom&&t.latestFrom.toLowerCase().indexOf('gokwik')===-1;html+='<div class="email-card info-card" data-url="'+gu+'" style="margin-bottom:12px;cursor:pointer"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px"><div style="flex:1"><div style="font-size:15px;font-weight:700;margin-bottom:5px">'+t.subject+'</div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-size:11.5px;color:var(--text3)">'+t.dateRange+'</span><span style="font-size:11.5px;color:var(--text3)">&middot; '+t.messageCount+' messages</span><span style="font-size:11.5px;color:var(--acc)">&#8594; Open in Gmail</span></div></div><span style="background:'+sb+';color:'+sc+';font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0">'+t.statusLabel+'</span></div>';if(t.context)html+='<div style="font-size:12px;color:var(--text3);margin-bottom:10px;font-style:italic;border-left:2px solid var(--border2);padding-left:10px">'+t.context+'</div>';var dc=fm?'var(--blue)':'var(--acc)';html+='<div style="background:var(--bg4);border-left:3px solid '+dc+';border-radius:0 8px 8px 0;padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:7px;height:7px;border-radius:50%;background:'+dc+'"></div><span style="font-size:11px;font-weight:700;color:'+dc+';text-transform:uppercase;letter-spacing:.05em">Latest \u2014 '+t.latestDate+'</span><span style="font-size:11px;color:var(--text3);margin-left:auto">'+t.latestFrom+'</span></div><div style="font-size:13.5px;color:var(--text);line-height:1.65">'+t.latestSummary+'</div></div></div>';});html+='<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--acc)">&#8505;</span><span>Only @'+((data&&data.merchantDomain)||'your domain')+' threads. Click to open in Gmail.</span></div></div>';return html;}
+var KB={'why-get-cart':{q:'Why build get-cart?',a:'<p><strong>MANDATORY</strong> \u2014 GoKwik calls /get-cart when checkout opens. Must return subtotal, total, items.</p>'},'get-cart':{q:'get-cart API?',a:'<pre>POST /get-cart\n{ "cart_id": "your_id" }\n// Returns: subtotal, total, items</pre>'},'checkout-lite-apis':{q:'APIs for Checkout Lite?',a:'<pre>1./check-order-exists 2./get-cart 3./set-shipping-address 4./place-order</pre>'},'checkout-adv-apis':{q:'APIs for Checkout Advanced?',a:'<p>Mandatory: check-order-exists, get-cart, set-shipping-address, place-order, v3/orders/update</p>'},'sequence':{q:'API sequence?',a:'<pre>1.check-order-exists 2.get-cart 3.set-shipping-address 4.[optional] 5.place-order</pre>'},'place-order':{q:'Place Order?',a:'<pre>POST /place-order {cart_id, payment_details, shipping_address, meta_data}</pre>'},'403':{q:'Why 403?',a:'<ul><li>Domain not whitelisted</li><li>Invalid checksum</li><li>Wrong MID</li></ul>'},'checksum':{q:'Checksum?',a:'<pre>crypto.createHmac("sha256",SECRET).update(JSON.stringify(body)).digest("hex")</pre>'},'ppcod':{q:'PPCOD?',a:'<pre>payment_method:"pp-cod", payment_instrument:"upi"\nmeta_data.ppcod:{prepaid_amount,payable_on_delivery}</pre>'},'kwikpass':{q:'KwikPass steps?',a:'<ol><li>Add window.merchantInfo</li><li>Load SDK</li><li>kpSendOTP(phone)</li><li>kpVerifyOTP({phone,otp})</li><li>Decrypt kpToken</li><li>handleKPLogout()</li></ol>'},'mandatory-apis':{q:'Mandatory APIs?',a:'<ul><li>get-cart, set-shipping-address, place-order, check-order-exists, v3/orders/update</li></ul>'},'headers':{q:'Headers?',a:'<pre>x-gk-checksum, x-gk-merchant-id, content-type</pre>'},'rto':{q:'RTO update?',a:'<pre>POST /v3/orders/update {merchant_order_id, order_status, awb_number}</pre>'}};
+var GENERIC=['<p>Try: "Why build get-cart?", "APIs for Checkout Lite?", "Why 403?"</p>','<p>Checklist: Domain whitelisted? Checksum fresh? check-order-exists before place-order?</p>'];var gi=0;
+async function qAsk(k){var a=KB[k];if(!a)return;setCTab('chat',document.getElementById('ctab-chat'));addU(a.q);showTyping();var ak=sessionStorage.getItem('claude_api_key');if(ak){var ai=await callClaudeAPI(a.q);hideTyping();if(ai){addB(ai);return;}}setTimeout(function(){hideTyping();addB(a.a);},400);}
+async function sendMsg(){var inp=document.getElementById('chat-inp');var t=inp.value.trim();if(!t)return;inp.value='';inp.style.height='';addU(t);showTyping();var ak=sessionStorage.getItem('claude_api_key');if(ak){var ai=await callClaudeAPI(t);hideTyping();if(ai){addB(ai);return;}}var k=findBestMatch(t);hideTyping();if(k&&KB[k])addB(KB[k].a);else{addB(GENERIC[gi%GENERIC.length]);gi++;}}
 function addU(t){var e=document.createElement('div');e.className='msg-u';e.textContent=t;document.getElementById('chat-msgs').appendChild(e);scrollC();}
 function addB(h){var e=document.createElement('div');e.className='msg-b';e.innerHTML=h;document.getElementById('chat-msgs').appendChild(e);scrollC();}
-function showTyping(){document.getElementById('typing').style.display='flex';scrollC();}
-function hideTyping(){document.getElementById('typing').style.display='none';}
+function showTyping(){document.getElementById('typing').style.display='flex';scrollC();}function hideTyping(){document.getElementById('typing').style.display='none';}
 function scrollC(){var m=document.getElementById('chat-msgs');setTimeout(function(){m.scrollTop=m.scrollHeight;},50);}
-function setCTab(t,el){
-  document.querySelectorAll('.ctab').forEach(function(x){x.classList.remove('on');});el.classList.add('on');
-  document.getElementById('chat-pane').style.display=t==='chat'?'flex':'none';
-  var fp=document.getElementById('faq-pane');fp.style.display=t==='faqc'?'block':'none';
-  if(t==='faqc'&&!fp.children.length){
-    fp.innerHTML=Object.entries(KB).map(function(e){return '<div class="faq-item" style="margin-bottom:5px"><div class="faq-q" style="font-size:12.5px" onclick="qAsk(\''+e[0]+'\')">'+e[1].q+'</div></div>';}).join('');
-  }
-}
-function kpCopy(btn,preId){
-  var pre=document.getElementById(preId);if(!pre)return;
-  navigator.clipboard.writeText(pre.innerText).then(function(){
-    var orig=btn.innerHTML;btn.innerHTML='Copied!';btn.style.color='var(--green)';btn.style.borderColor='rgba(34,197,94,.4)';
-    setTimeout(function(){btn.innerHTML=orig;btn.style.color='var(--text2)';btn.style.borderColor='var(--border2)';},2000);
-  });
-}
-function copyCode(btn,text){
-  navigator.clipboard.writeText(text).then(function(){
-    var orig=btn.innerHTML;btn.innerHTML='Copied!';btn.style.color='var(--green)';
-    setTimeout(function(){btn.innerHTML=orig;btn.style.color='var(--text2)';},2000);
-  });
-}
+function setCTab(t,el){document.querySelectorAll('.ctab').forEach(function(x){x.classList.remove('on');});el.classList.add('on');document.getElementById('chat-pane').style.display=t==='chat'?'flex':'none';var fp=document.getElementById('faq-pane');fp.style.display=t==='faqc'?'block':'none';if(t==='faqc'&&!fp.children.length){fp.innerHTML=Object.entries(KB).map(function(e){return '<div class="faq-item" style="margin-bottom:5px"><div class="faq-q" style="font-size:12.5px" onclick="qAsk('+JSON.stringify(e[0])+')">'+e[1].q+'</div></div>';}).join('');}}
+function kpCopy(btn,preId){var pre=document.getElementById(preId);if(!pre)return;navigator.clipboard.writeText(pre.innerText).then(function(){var o=btn.innerHTML;btn.innerHTML='Copied!';btn.style.color='var(--green)';setTimeout(function(){btn.innerHTML=o;btn.style.color='var(--text2)';},2000);});}
+function copyCode(btn,text){navigator.clipboard.writeText(text).then(function(){var o=btn.innerHTML;btn.innerHTML='Copied!';btn.style.color='var(--green)';setTimeout(function(){btn.innerHTML=o;btn.style.color='var(--text2)';},2000);});}
 function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
-
 document.addEventListener('DOMContentLoaded',function(){
   loadMerchants();
   customLogo=(function(){try{return localStorage.getItem('ka_custom_logo')||null;}catch(e){return null;}})();
   if(customLogo)applyLogo();
   if(loadSession()){showApp();}else{prefillMerchant();}
-  if(sessionStorage.getItem('claude_api_key')){var btn=document.getElementById('ai-connect-btn');if(btn){btn.textContent='AI Active';btn.style.color='var(--green)';}}
+  if(sessionStorage.getItem('claude_api_key')){var b=document.getElementById('ai-connect-btn');if(b){b.textContent='AI Active';b.style.color='var(--green)';}}
   var inp=document.getElementById('chat-inp');
-  if(inp){
-    inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}});
-    inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,70)+'px';});
-  }
+  if(inp){inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}});inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,70)+'px';});}
   var cp=document.getElementById('chat-pane');if(cp)cp.style.flexDirection='column';
-  document.addEventListener('click',function(e){
-    var card=e.target.closest('.email-card');
-    if(card){var url=card.getAttribute('data-url');if(url)window.open(url,'_blank');}
-  });
+  document.addEventListener('click',function(e){var card=e.target.closest('.email-card');if(card){var url=card.getAttribute('data-url');if(url)window.open(url,'_blank');}});
 });
 </script>
 </body>
