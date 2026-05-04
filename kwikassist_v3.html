@@ -271,9 +271,17 @@ button,input,select,textarea{font-family:var(--font)}
   <div class="page-hd">
     <div><div class="page-title">Projects</div><div class="page-sub" id="proj-count">0 projects</div></div>
     <div style="display:flex;gap:8px">
+      <button class="btn btn-out btn-sm" onclick="exportData()" title="Download all merchant data as backup JSON">&#128190; Export Data</button>
+      <label class="btn btn-out btn-sm" style="cursor:pointer" title="Import merchant data from backup JSON">&#128228; Import Data<input type="file" accept=".json" style="display:none" onchange="importData(this)"></label>
       <button class="btn btn-out btn-sm" onclick="if(confirm('Reset to demo data?'))resetData()">&#x21BA; Reset</button>
       <button class="btn btn-acc btn-sm" onclick="openAdd()">+ Add Project</button>
     </div>
+  </div>
+  <div id="import-hint-banner" style="display:none;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:10px 14px;margin:0 20px 12px;align-items:center;gap:10px;font-size:12.5px">
+    <span style="font-size:16px">&#9888;</span>
+    <div style="flex:1;color:var(--amber)"><strong>No saved data found.</strong> If you have a backup JSON, import it now to restore your merchant data.</div>
+    <label class="btn btn-sm" style="cursor:pointer;background:var(--amber);color:#000;border:none">&#128228; Import Backup<input type="file" accept=".json" style="display:none" onchange="importData(this);document.getElementById('import-hint-banner').style.display='none'"></label>
+    <button onclick="document.getElementById('import-hint-banner').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:0">&#215;</button>
   </div>
   <div class="stats" id="adm-stats"></div>
   <div class="filter-bar">
@@ -412,6 +420,13 @@ button,input,select,textarea{font-family:var(--font)}
         </div>
         <div style="font-size:11px;color:var(--text3);margin-top:3px">Upload the official KwikPass PDF. Merchant sees a &#x1F4C4; Download button under the KwikPass Integration Guide section.</div>
       </div>
+      <div class="fg">
+        <label>APIs for This Merchant <span style="font-size:10px;background:var(--blue-dim);color:var(--blue);padding:2px 7px;border-radius:10px;font-weight:600;margin-left:4px">Merchant sees full docs under Documents</span></label>
+        <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:8px;padding:12px;max-height:240px;overflow-y:auto" id="api-list-picker">
+          <div style="font-size:11.5px;color:var(--text2);margin-bottom:8px">Select which APIs this merchant needs to implement. They will see purpose, request &amp; response for each.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px" id="api-checkboxes"></div>
+        </div>
+      </div>
     </div>
     <div id="mt-dates-body" style="display:none">
       <div class="form-row"><div class="fg"><label>Onboarding Date</label><input class="fi" type="date" id="f-d1"></div><div class="fg"><label>Go-Live Target</label><input class="fi" type="date" id="f-d2"></div></div>
@@ -419,6 +434,15 @@ button,input,select,textarea{font-family:var(--font)}
     </div>
     <div id="mt-creds-body" style="display:none">
       <div class="fg"><label>Validator Config ID</label><input class="fi" id="f-configid" placeholder="e.g. 69d89bcb8dfa9bc0e299fb62" style="font-family:monospace"><div style="font-size:11px;color:var(--text3);margin-top:3px">Login at checkout-validator.gokwik.co</div></div>
+      <div class="fg" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:14px">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:0">
+          <input type="checkbox" id="f-kp-enabled" style="width:16px;height:16px;cursor:pointer;accent-color:var(--acc)">
+          <div>
+            <div style="font-size:13px;font-weight:600">Enable KwikPass for this merchant</div>
+            <div style="font-size:11.5px;color:var(--text2);margin-top:2px">When enabled, merchant will see the KwikPass Integration Guide in their Documents tab. Uncheck to hide it.</div>
+          </div>
+        </label>
+      </div>
       <div class="fg"><label>KP Token JWE Production Decryption Key</label><input class="fi" id="f-kpprodkey" placeholder="Production JWE secret key" style="font-family:monospace"></div>
       <div class="cred-sec"><div class="cred-sec-title">Sandbox</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
@@ -440,13 +464,6 @@ button,input,select,textarea{font-family:var(--font)}
     <div id="mt-notes-body" style="display:none">
       <div class="fg"><label>Integration Notes</label><textarea class="fi" id="f-notes" rows="3" placeholder="Special requirements..."></textarea></div>
       <div class="form-row"><div class="fg"><label>SE Email</label><input class="fi" id="f-se-email" placeholder="se@gokwik.co"></div><div class="fg"><label>Merchant Tech Email</label><input class="fi" id="f-merch-email" placeholder="tech@merchant.com"></div></div>
-      <div class="fg">
-        <label>APIs Merchant Needs to Build <span style="font-size:10px;background:var(--blue-dim);color:var(--blue);padding:2px 7px;border-radius:10px;font-weight:600;margin-left:4px">Visible to merchant under Documents</span></label>
-        <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:8px;padding:12px;max-height:220px;overflow-y:auto" id="api-list-picker">
-          <div style="font-size:11.5px;color:var(--text2);margin-bottom:8px">Select which APIs this merchant needs to implement:</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px" id="api-checkboxes"></div>
-        </div>
-      </div>
     </div>
   </div>
   <div class="modal-ft"><button class="btn btn-out" onclick="closeModal('m-modal')">Cancel</button><button class="btn btn-acc" id="m-save-btn" onclick="saveMerchant()">Add Project</button></div>
@@ -516,6 +533,31 @@ function loadMerchants(){try{var s=localStorage.getItem('ka_merchants');if(s){me
 function saveSession(){sessionStorage.setItem('ka_user',JSON.stringify(user));}
 function loadSession(){try{var s=sessionStorage.getItem('ka_user');if(s){user=JSON.parse(s);return true;}}catch(e){}return false;}
 function resetData(){localStorage.removeItem('ka_merchants');location.reload();}
+function exportData(){
+  var data={merchants:merchants,exportedAt:new Date().toISOString(),version:'v3'};
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='kwikassist_backup_'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();
+  showToast('Data exported! Save this file as your backup.');
+}
+function importData(inp){
+  var file=inp.files[0];if(!file)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      if(!data.merchants||!Array.isArray(data.merchants)){showToast('Invalid backup file');return;}
+      if(!confirm('Import '+data.merchants.length+' merchants? This will replace current data.')){return;}
+      merchants=data.merchants;
+      saveMerchants();
+      renderStats();renderMerchants();renderStagePills();
+      showToast('Imported '+merchants.length+' merchants successfully!');
+    }catch(ex){showToast('Error reading file: '+ex.message);}
+  };
+  r.readAsText(file);
+}
 function toggleTheme(){isDark=!isDark;document.body.classList.toggle('light',!isDark);document.getElementById('ico-moon').style.display=isDark?'block':'none';document.getElementById('ico-sun').style.display=isDark?'none':'block';}
 function triggerLogoUpload(){document.getElementById('logo-upload').click();}
 function handleLogoFile(inp){var f=inp.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>2*1024*1024){showToast('Max 2MB');return;}var r=new FileReader();r.onload=function(e){customLogo=e.target.result;try{localStorage.setItem('ka_custom_logo',customLogo);}catch(e){}applyLogo();showToast('Logo saved!');};r.readAsDataURL(f);}
@@ -547,7 +589,7 @@ function showApp(){
     document.getElementById('tb-search-wrap').style.display='none';
     document.getElementById('tb-back-btn').style.display='none';
     document.getElementById('logo-upload-btn').style.display='none';
-    var tw2=document.getElementById('tb-logo-wrap');if(tw2){tw2.onclick=null;tw2.style.cursor='default';}
+    var tw2=document.getElementById('tb-logo-wrap');if(tw2){tw2.onclick=function(){showTab('dashboard',document.getElementById('nav-dashboard'));};tw2.style.cursor='pointer';tw2.title='Go to My Integration';}
     document.getElementById('sb-admin-back').style.display='none';
     document.getElementById('admin-view').style.display='none';
     document.getElementById('merchant-view').style.display='flex';
@@ -567,19 +609,19 @@ function setSF(v){stageFilter=v;renderStagePills();filterM();}
 function filterM(){renderMerchants();}
 function renderMerchants(){var q=(document.getElementById('s-inp').value||'').toLowerCase();var sort=document.getElementById('sort-sel').value;var list=merchants.filter(function(m){var qm=!q||(m.name.toLowerCase().includes(q)||m.mid.toLowerCase().includes(q)||(m.category||'').toLowerCase().includes(q));var sm=stageFilter==='all'||m.stage===stageFilter;return qm&&sm;});if(sort==='name')list.sort(function(a,b){return a.name.localeCompare(b.name);});else if(sort==='stage')list.sort(function(a,b){return a.stage-b.stage;});else list.sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});document.getElementById('proj-count').textContent=list.length+' project'+(list.length!==1?'s':'')+' found';var ml=document.getElementById('mc-list'),nd=document.getElementById('no-mc');if(!list.length){ml.innerHTML='';nd.style.display='block';return;}nd.style.display='none';ml.innerHTML=list.map(function(m){var s=STAGES[m.stage],ini=m.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();return '<div class="mc"><div><div class="mc-top"><div class="mc-logo">'+ini+'</div><div><div class="mc-name">'+m.name+'</div><div class="mc-url">'+(m.url||'&mdash;')+'</div></div><span class="sbadge '+s.c+'" style="margin-left:8px">'+(m.stage+1)+'. '+s.s+'</span></div><div class="mc-meta"><span class="mci"><strong>'+m.platform+'</strong></span><span class="mci">ARR: <strong>'+(m.arr||0)+' Cr</strong></span><span class="mci"><strong>'+(m.txns||0)+'</strong>/day</span><span class="mci">AOV: <strong>Rs'+Number(m.aov||0).toLocaleString()+'</strong></span><span class="mci"><strong>'+m.intType+'</strong></span><span class="mci"><strong>'+(m.owner||'&mdash;')+'</strong></span></div></div><div class="mc-actions"><button class="btn btn-acc btn-sm" onclick="viewMerchant(\''+m.id+'\')">View Details</button><button class="btn btn-out btn-sm" onclick="openEdit(\''+m.id+'\')">Edit</button><div style="display:flex;gap:5px"><button class="btn btn-out btn-sm" onclick="moveStage(\''+m.id+'\',-1)" '+(m.stage===0?'disabled style="opacity:.4"':'')+'>&#8592; Stage</button><button class="btn btn-green btn-sm" onclick="moveStage(\''+m.id+'\',1)" '+(m.stage===9?'disabled style="opacity:.4"':'')+'>Stage &#8594;</button></div><button class="btn btn-out btn-sm" onclick="openBRDDirect(\''+m.id+'\')" style="font-size:11px">Upload BRD</button><button class="btn btn-danger btn-sm" onclick="openDel(\''+m.id+'\')">Delete</button></div></div>';}).join('');}
 function moveStage(id,dir){var m=getM(id),ns=m.stage+dir;if(ns<0||ns>9)return;m.stage=ns;if(taskState[id])delete taskState[id][ns];saveMerchants();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ns+1)+': '+STAGES[ns].n);}
-function viewMerchant(id){user={type:'merchant',id:id};saveSession();navHistory=[];var m=getM(id);document.getElementById('tb-badge').textContent='Merchant';document.getElementById('tb-badge').className='tb-badge bm';document.getElementById('tb-av').textContent=m.name[0];document.getElementById('tb-name').textContent=m.name;document.getElementById('tb-search-wrap').style.display='none';document.getElementById('tb-back-btn').style.display='inline-flex';document.getElementById('logo-upload-btn').style.display='flex';var tw=document.getElementById('tb-logo-wrap');if(tw){tw.onclick=triggerLogoUpload;tw.style.cursor='pointer';}document.getElementById('sb-admin-back').style.display='block';document.getElementById('admin-view').style.display='none';document.getElementById('merchant-view').style.display='flex';document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});document.getElementById('nav-dashboard').classList.add('active');syncEnvBadges(m);if(customLogo)applyLogo();document.getElementById('portal-main').innerHTML=renderDashboard(getM(id));showAdminBar();}
+function viewMerchant(id){user={type:'merchant',id:id};saveSession();navHistory=[];var m=getM(id);document.getElementById('tb-badge').textContent='Merchant';document.getElementById('tb-badge').className='tb-badge bm';document.getElementById('tb-av').textContent=m.name[0];document.getElementById('tb-name').textContent=m.name;document.getElementById('tb-search-wrap').style.display='none';document.getElementById('tb-back-btn').style.display='inline-flex';document.getElementById('logo-upload-btn').style.display='flex';var tw=document.getElementById('tb-logo-wrap');if(tw){tw.onclick=function(){showTab('dashboard',document.getElementById('nav-dashboard'));};tw.style.cursor='pointer';tw.title='Go to My Integration';}document.getElementById('sb-admin-back').style.display='block';document.getElementById('admin-view').style.display='none';document.getElementById('merchant-view').style.display='flex';document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});document.getElementById('nav-dashboard').classList.add('active');syncEnvBadges(m);if(customLogo)applyLogo();document.getElementById('portal-main').innerHTML=renderDashboard(getM(id));showAdminBar();}
 function adminJumpStage(mid,ts){var bb=document.getElementById('tb-back-btn');if(!bb||bb.style.display==='none'){showToast('Admin only');return;}var m=getM(mid);if(!m||ts===m.stage)return;m.stage=ts;if(taskState[mid])delete taskState[mid][ts];saveMerchants();syncEnvBadges(m);document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ts+1)+': '+STAGES[ts].n);}
 function showAdminBar(){var bar=document.getElementById('admin-stage-bar');if(!bar)return;var bb=document.getElementById('tb-back-btn');bar.style.display=(bb&&bb.style.display!=='none')?'flex':'none';}
 function openAdd(){editId=null;document.getElementById('m-title').textContent='Add New Project';document.getElementById('m-save-btn').textContent='Add Project';clearForm();document.getElementById('f-d1').value=new Date().toISOString().split('T')[0];setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
-function openEdit(id){editId=id;var m=getM(id);document.getElementById('m-title').textContent='Edit Project';document.getElementById('m-save-btn').textContent='Save Changes';document.getElementById('f-name').value=m.name||'';document.getElementById('f-mid').value=m.mid||'';document.getElementById('f-platform').value=m.platform||'Custom';document.getElementById('f-category').value=m.category||'';document.getElementById('f-arr').value=m.arr||'';document.getElementById('f-txns').value=m.txns||'';document.getElementById('f-aov').value=m.aov||'';document.getElementById('f-spoc').value=m.spoc||'';document.getElementById('f-inttype').value=m.intType||'Checkout Advanced';document.getElementById('f-pg').value=m.pg||'';document.getElementById('f-owner').value=m.owner||'';document.getElementById('f-stage').value=m.stage||0;document.getElementById('f-url').value=m.url||'';document.getElementById('f-brd').value=m.brd||'';document.getElementById('f-apidoc').value=m.apidoc||'';document.getElementById('f-postman').value=m.postman||'';document.getElementById('f-d1').value=m.d1||'';document.getElementById('f-d2').value=m.d2||'';document.getElementById('f-sla').value=m.sla||'';document.getElementById('f-configid').value=m.configId||'';document.getElementById('f-kpprodkey').value=m.kpProdKey||'';document.getElementById('f-sb-mid').value=m.sb.mid||'';document.getElementById('f-sb-app').value=m.sb.app||'';document.getElementById('f-sb-sec').value=m.sb.sec||'';document.getElementById('f-sb-url').value=m.sb.url||'';document.getElementById('f-pr-mid').value=m.prod.mid||'';document.getElementById('f-pr-app').value=m.prod.app||'';document.getElementById('f-pr-sec').value=m.prod.sec||'';document.getElementById('f-pr-url').value=m.prod.url||'';_currentApiList=(m.apiList||[]).slice();document.getElementById('f-notes').value=m.notes||'';document.getElementById('f-se-email').value=m.seEmail||'';document.getElementById('f-merch-email').value=m.mEmail||'';brdFileData=m.brdFile||null;brdFileType=m.brdFileType||null;window._origCreds={sb:JSON.parse(JSON.stringify(m.sb||{})),prod:JSON.parse(JSON.stringify(m.prod||{})),kpProdKey:m.kpProdKey||''};var bs=document.getElementById('brd-upload-st');if(bs){bs.style.display=m.brdFile?'block':'none';bs.textContent=m.brdFile?'File uploaded':'';}
+function openEdit(id){editId=id;var m=getM(id);document.getElementById('m-title').textContent='Edit Project';document.getElementById('m-save-btn').textContent='Save Changes';document.getElementById('f-name').value=m.name||'';document.getElementById('f-mid').value=m.mid||'';document.getElementById('f-platform').value=m.platform||'Custom';document.getElementById('f-category').value=m.category||'';document.getElementById('f-arr').value=m.arr||'';document.getElementById('f-txns').value=m.txns||'';document.getElementById('f-aov').value=m.aov||'';document.getElementById('f-spoc').value=m.spoc||'';document.getElementById('f-inttype').value=m.intType||'Checkout Advanced';document.getElementById('f-pg').value=m.pg||'';document.getElementById('f-owner').value=m.owner||'';document.getElementById('f-stage').value=m.stage||0;document.getElementById('f-url').value=m.url||'';document.getElementById('f-brd').value=m.brd||'';document.getElementById('f-apidoc').value=m.apidoc||'';document.getElementById('f-postman').value=m.postman||'';document.getElementById('f-d1').value=m.d1||'';document.getElementById('f-d2').value=m.d2||'';document.getElementById('f-sla').value=m.sla||'';document.getElementById('f-configid').value=m.configId||'';document.getElementById('f-kpprodkey').value=m.kpProdKey||'';var kpCb=document.getElementById('f-kp-enabled');if(kpCb)kpCb.checked=m.kpEnabled===true;document.getElementById('f-sb-mid').value=m.sb.mid||'';document.getElementById('f-sb-app').value=m.sb.app||'';document.getElementById('f-sb-sec').value=m.sb.sec||'';document.getElementById('f-sb-url').value=m.sb.url||'';document.getElementById('f-pr-mid').value=m.prod.mid||'';document.getElementById('f-pr-app').value=m.prod.app||'';document.getElementById('f-pr-sec').value=m.prod.sec||'';document.getElementById('f-pr-url').value=m.prod.url||'';_currentApiList=(m.apiList||[]).slice();document.getElementById('f-notes').value=m.notes||'';document.getElementById('f-se-email').value=m.seEmail||'';document.getElementById('f-merch-email').value=m.mEmail||'';brdFileData=m.brdFile||null;brdFileType=m.brdFileType||null;window._origCreds={sb:JSON.parse(JSON.stringify(m.sb||{})),prod:JSON.parse(JSON.stringify(m.prod||{})),kpProdKey:m.kpProdKey||''};var bs=document.getElementById('brd-upload-st');if(bs){bs.style.display=m.brdFile?'block':'none';bs.textContent=m.brdFile?'File uploaded':'';}
 var kpst=document.getElementById('kpdoc-upload-st');if(kpst){kpst.textContent=m.kpDoc?'✅ KwikPass PDF uploaded':'No file uploaded';kpst.style.color=m.kpDoc?'var(--green)':'var(--text2)';}
 window._kpDocData=null;setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
-function clearForm(){['f-name','f-mid','f-category','f-arr','f-txns','f-aov','f-spoc','f-pg','f-owner','f-url','f-brd','f-apidoc','f-postman','f-d1','f-d2','f-sla','f-configid','f-kpprodkey','f-sb-mid','f-sb-app','f-sb-sec','f-pr-mid','f-pr-app','f-pr-sec','f-notes','f-se-email','f-merch-email'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});document.getElementById('f-sb-url').value='https://sandbox.api.gokwik.co';document.getElementById('f-pr-url').value='https://api.gokwik.co';document.getElementById('f-platform').value='Custom';document.getElementById('f-inttype').value='Checkout Advanced';document.getElementById('f-stage').value='0';brdFileData=null;brdFileType=null;window._apiDocData=null;window._kpDocData=null;_currentApiList=[];var kpst2=document.getElementById('kpdoc-upload-st');if(kpst2){kpst2.textContent='No file uploaded';kpst2.style.color='var(--text2)';}}
-function saveMerchant(){var name=document.getElementById('f-name').value.trim(),mid=document.getElementById('f-mid').value.trim();if(!name){showToast('Name required');return;}if(!mid){showToast('MID required');return;}var d={name:name,mid:mid,platform:document.getElementById('f-platform').value,category:document.getElementById('f-category').value,arr:document.getElementById('f-arr').value,txns:+document.getElementById('f-txns').value||0,aov:+document.getElementById('f-aov').value||0,spoc:document.getElementById('f-spoc').value,intType:document.getElementById('f-inttype').value,pg:document.getElementById('f-pg').value,stage:+document.getElementById('f-stage').value,owner:document.getElementById('f-owner').value,url:document.getElementById('f-url').value,brd:document.getElementById('f-brd').value,apidoc:document.getElementById('f-apidoc').value,postman:document.getElementById('f-postman').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,sla:+document.getElementById('f-sla').value||30,configId:document.getElementById('f-configid').value.trim(),kpProdKey:(function(){var v=document.getElementById('f-kpprodkey').value.trim();return v||(editId&&window._origCreds?window._origCreds.kpProdKey:'');}()),sb:(function(){var oc=(editId&&window._origCreds)?window._origCreds.sb:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-sb-mid')||(oc.mid||mid),app:fv('f-sb-app')||(oc.app||''),sec:fv('f-sb-sec')||(oc.sec||''),url:fv('f-sb-url')||(oc.url||'https://sandbox.api.gokwik.co')};}()),prod:(function(){var oc2=(editId&&window._origCreds)?window._origCreds.prod:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-pr-mid')||(oc2.mid||''),app:fv('f-pr-app')||(oc2.app||''),sec:fv('f-pr-sec')||(oc2.sec||''),url:fv('f-pr-url')||(oc2.url||'https://api.gokwik.co')};}()),notes:document.getElementById('f-notes').value,apidoc:(window._apiDocData||'').length>0?window._apiDocData:document.getElementById('f-apidoc').value.trim(),apiList:getSelectedApiList(),seEmail:document.getElementById('f-se-email').value,mEmail:document.getElementById('f-merch-email').value};if(brdFileData){d.brdFile=brdFileData;d.brdFileType=brdFileType;}if(window._kpDocData){d.kpDoc=window._kpDocData;}else if(editId){var em=merchants.find(function(x){return x.id===editId;});if(em&&em.kpDoc)d.kpDoc=em.kpDoc;}if(editId){var i=merchants.findIndex(function(m){return m.id===editId;});merchants[i]=Object.assign(merchants[i],d);showToast('Project updated!');}else{d.id='M'+Date.now();d.createdAt=new Date().toISOString().split('T')[0];merchants.unshift(d);showToast('Project added!');}saveMerchants();brdFileData=null;brdFileType=null;closeModal('m-modal');renderStats();renderMerchants();renderStagePills();}
+function clearForm(){['f-name','f-mid','f-category','f-arr','f-txns','f-aov','f-spoc','f-pg','f-owner','f-url','f-brd','f-apidoc','f-postman','f-d1','f-d2','f-sla','f-configid','f-kpprodkey','f-sb-mid','f-sb-app','f-sb-sec','f-pr-mid','f-pr-app','f-pr-sec','f-notes','f-se-email','f-merch-email'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});document.getElementById('f-sb-url').value='https://sandbox.api.gokwik.co';document.getElementById('f-pr-url').value='https://api.gokwik.co';document.getElementById('f-platform').value='Custom';document.getElementById('f-inttype').value='Checkout Advanced';document.getElementById('f-stage').value='0';brdFileData=null;brdFileType=null;window._apiDocData=null;window._kpDocData=null;_currentApiList=[];var kpCb2=document.getElementById('f-kp-enabled');if(kpCb2)kpCb2.checked=false;var kpst2=document.getElementById('kpdoc-upload-st');if(kpst2){kpst2.textContent='No file uploaded';kpst2.style.color='var(--text2)';}}
+function saveMerchant(){var name=document.getElementById('f-name').value.trim(),mid=document.getElementById('f-mid').value.trim();if(!name){showToast('Name required');return;}if(!mid){showToast('MID required');return;}var d={name:name,mid:mid,platform:document.getElementById('f-platform').value,category:document.getElementById('f-category').value,arr:document.getElementById('f-arr').value,txns:+document.getElementById('f-txns').value||0,aov:+document.getElementById('f-aov').value||0,spoc:document.getElementById('f-spoc').value,intType:document.getElementById('f-inttype').value,pg:document.getElementById('f-pg').value,stage:+document.getElementById('f-stage').value,owner:document.getElementById('f-owner').value,url:document.getElementById('f-url').value,brd:document.getElementById('f-brd').value,apidoc:document.getElementById('f-apidoc').value,postman:document.getElementById('f-postman').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,sla:+document.getElementById('f-sla').value||30,configId:document.getElementById('f-configid').value.trim(),kpProdKey:(function(){var v=document.getElementById('f-kpprodkey').value.trim();return v||(editId&&window._origCreds?window._origCreds.kpProdKey:'');}()),sb:(function(){var oc=(editId&&window._origCreds)?window._origCreds.sb:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-sb-mid')||(oc.mid||mid),app:fv('f-sb-app')||(oc.app||''),sec:fv('f-sb-sec')||(oc.sec||''),url:fv('f-sb-url')||(oc.url||'https://sandbox.api.gokwik.co')};}()),prod:(function(){var oc2=(editId&&window._origCreds)?window._origCreds.prod:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-pr-mid')||(oc2.mid||''),app:fv('f-pr-app')||(oc2.app||''),sec:fv('f-pr-sec')||(oc2.sec||''),url:fv('f-pr-url')||(oc2.url||'https://api.gokwik.co')};}()),notes:document.getElementById('f-notes').value,apidoc:(window._apiDocData||'').length>0?window._apiDocData:document.getElementById('f-apidoc').value.trim(),apiList:getSelectedApiList(),seEmail:document.getElementById('f-se-email').value,mEmail:document.getElementById('f-merch-email').value,kpEnabled:(function(){var cb=document.getElementById('f-kp-enabled');return cb?cb.checked:false;}())};if(brdFileData){d.brdFile=brdFileData;d.brdFileType=brdFileType;}if(window._kpDocData){d.kpDoc=window._kpDocData;}else if(editId){var em=merchants.find(function(x){return x.id===editId;});if(em&&em.kpDoc)d.kpDoc=em.kpDoc;}if(editId){var i=merchants.findIndex(function(m){return m.id===editId;});merchants[i]=Object.assign(merchants[i],d);showToast('Project updated!');}else{d.id='M'+Date.now();d.createdAt=new Date().toISOString().split('T')[0];merchants.unshift(d);showToast('Project added!');}saveMerchants();brdFileData=null;brdFileType=null;closeModal('m-modal');renderStats();renderMerchants();renderStagePills();}
 function setMT(t,el){
   document.querySelectorAll('.mtab').forEach(function(x){x.classList.remove('on');});el.classList.add('on');
   ['info','links','dates','creds','notes'].forEach(function(x){document.getElementById('mt-'+x+'-body').style.display=x===t?'block':'none';});
-  if(t==='notes') renderApiCheckboxes();
+  if(t==='notes'||t==='links') renderApiCheckboxes();
 }
 var ALL_APIS_LIST=[
   {id:'get-cart',label:'/get-cart — Get Cart'},
@@ -798,12 +840,12 @@ function renderDocs(m){
   html+=sec('&#128230;','Postman Collection','All GoKwik APIs — import ready','tg','Available','doc-pm','<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:13px;font-weight:600;margin-bottom:8px">GoKwik API Postman Collection</div><div style="font-size:12.5px;color:var(--text2);margin-bottom:10px">Import to test all APIs. Includes checksum scripts.</div><a href="'+pm+'" target="_blank" class="btn btn-acc btn-sm">Open in Postman &#8594;</a></div>');
   var apiBody='';
   if(m.apidoc){var isFile=m.apidoc.startsWith('data:');apiBody+='<div style="background:var(--bg4);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:18px">&#128196;</span><div style="flex:1;font-size:13px;font-weight:500">'+(isFile?'API Doc (uploaded)':'API Doc Link')+'</div>';if(isFile){apiBody+='<a href="'+m.apidoc+'" download="API_Documentation" class="btn btn-acc btn-sm">&#128196; Download &#8594;</a>';}else{apiBody+='<a href="'+m.apidoc+'" target="_blank" class="btn btn-acc btn-sm">Open &#8594;</a>';}apiBody+='</div>';}
-  if(m.apiList&&m.apiList.length){apiBody+='<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px">'+m.apiList.length+' APIs to build (selected by SE):</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';m.apiList.forEach(function(id){apiBody+='<span style="background:var(--acc-dim);color:var(--acc);font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:monospace">/'+id+'</span>';});apiBody+='</div><button class="btn btn-acc btn-sm" onclick="showMerchantAPIDoc(\'' +m.id+ '\')">View My API Reference &#8594;</button></div>';}else if(!m.apidoc){apiBody='<div style="font-size:12.5px;color:var(--text3);font-style:italic;padding:8px 0">Your SE will configure this after your API Walkthrough.</div>';}
+  if(m.apiList&&m.apiList.length){if(m.apidoc)apiBody+='<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:10px 0 8px">YOUR API DOCUMENTATION</div>';apiBody+=renderInlineAPIDocs(m.apiList);}else if(!m.apidoc){apiBody='<div style="font-size:12.5px;color:var(--text3);font-style:italic;padding:8px 0">Your SE will configure this after your API Walkthrough.</div>';}
   html+=sec('&#128216;','API Documentation',m.apiList&&m.apiList.length?m.apiList.length+' APIs selected':m.apidoc?'Doc uploaded':'Configured by SE',m.apiList&&m.apiList.length||m.apidoc?'tg':'s0',m.apiList&&m.apiList.length||m.apidoc?'Available':'Pending','doc-api',apiBody);
   var kpDownloadBtn=m.kpDoc?'<a href="'+m.kpDoc+'" download="KwikPass_Integration_Guide" style="display:inline-flex;align-items:center;gap:5px;background:var(--acc);color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none;flex-shrink:0">&#128196; Download</a>':'<a href="KwikPass_Integration_Guide.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:var(--bg4);color:var(--text2);border:1.5px solid var(--border2);border-radius:7px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none;flex-shrink:0">&#128196; Default PDF</a>';
   var kpBody='<div style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(59,130,246,.1));border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px"><div style="flex:1"><div style="font-size:13px;font-weight:700;margin-bottom:2px">Official PDF</div><div style="font-size:12px;color:var(--text2)">'+(m.kpDoc?'Uploaded by your SE':'Complete KwikPass Guide for Custom Headless Stores')+'</div></div>'+kpDownloadBtn+'</div>';
   kpBody+=renderKwikPass(m,true);
-  html+=sec('&#128273;','KwikPass Integration Guide','OTP, SSO, KP Token — all 7 steps with code','tg','&#10003; Official','doc-kp',kpBody);
+  if(m.kpEnabled)html+=sec('&#128273;','KwikPass Integration Guide','OTP, SSO, KP Token — all 7 steps with code','tg','&#10003; Official','doc-kp',kpBody);
   html+='</div>';return html;
 }
 function toggleDocSec(id){
@@ -1100,6 +1142,101 @@ function renderValidator(m){
   html+='</div>';
   return html;
 }
+function renderInlineAPIDocs(apiList){
+  var AD={
+    'get-cart':{p:'/get-cart',tag:'MANDATORY',tc:'tr',n:'Get Cart',
+      why:'GoKwik has zero knowledge of your cart without this. It syncs items, prices, payment methods, and shipping options.',
+      req:'{\n  "cart_id": "<your_cart_id>"\n}',
+      res:'{\n  "data": {\n    "cart": {\n      "subtotal": 2000, "total": 1900,\n      "items": [{"product_id":"21351139","variant_id":"505250","sku":"ACB123","title":"Product Name","quantity":2,"price":1000,"total":2000,"stock_status":"in_stock"}],\n      "available_payment_methods": [{"id":"prepaid","description":"Prepaid","price":0}],\n      "available_shipping_methods": [{"id":"free_shipping","price":0,"title":"Free Delivery"}],\n      "available_coupons": [{"amount":100,"code":"SAVE100","eligibility":"true"}]\n    }\n  }\n}'},
+    'set-shipping-address':{p:'/set-shipping-address',tag:'MANDATORY',tc:'tr',n:'Set Shipping Address',
+      why:'Sets delivery address and fetches available shipping methods for that pincode. Return empty array for unserviceable pincodes.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "shipping_address": {\n    "postal_code": "560001", "city": "Bangalore", "state": "Karnataka",\n    "first_name": "John", "last_name": "Doe",\n    "address": "123 Main Street", "email": "john@example.com", "phone": "9876543210"\n  }\n}',
+      res:'{\n  "data": {\n    "cart": {\n      "available_shipping_methods": [\n        {"id":"express_shipping","price":100,"title":"Express Delivery"},\n        {"id":"free_shipping","price":0,"title":"Free Shipping"}\n      ]\n    }\n  }\n}'},
+    'set-shipping-option':{p:'/set-shipping-option',tag:'OPTIONAL',tc:'s3',n:'Set Shipping Option',
+      why:'Let customer select preferred shipping method. Recalculates order total.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "shipping_option": "express_shipping"\n}',
+      res:'{\n  "data": {\n    "cart": {\n      "shipping_total": 100,\n      "total": 2100,\n      "selected_shipping_method": {"id":"express_shipping","price":100,"title":"Express Delivery"}\n    }\n  }\n}'},
+    'get-all-discount':{p:'/get-all-discount',tag:'OPTIONAL',tc:'s3',n:'Get All Discounts',
+      why:'Returns all available coupon codes to display in the checkout UI.',
+      req:'{\n  "cart_id": "<cart_id>"\n}',
+      res:'{\n  "data": {\n    "available_coupons": [{"amount":100,"code":"SAVE100","description":"Flat Rs100 off","eligibility":"true"}]\n  }\n}'},
+    'apply-discount':{p:'/apply-discount',tag:'OPTIONAL',tc:'s3',n:'Apply Discount',
+      why:'Applies coupon to cart. CRITICAL: Always returns HTTP 200 even for invalid coupons — always check the invalid_coupon field.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "discount_code": "SAVE100"\n}',
+      res:'// Valid coupon:\n{"data":{"cart":{"discount_total":100,...}}}\n\n// Invalid coupon (still HTTP 200 — check this!):\n{"data":{"cart":{...}},"invalid_coupon":"Coupon expired"}'},
+    'remove-discount':{p:'/remove-discount',tag:'OPTIONAL',tc:'s3',n:'Remove Discount',
+      why:'Removes applied coupon and recalculates cart total.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "discount_code": "SAVE100"\n}',
+      res:'{\n  "data": {"cart": {"discount_total":0,"total":2000}}\n}'},
+    'get-user':{p:'/get-user',tag:'OPTIONAL',tc:'s3',n:'Get Merchant User',
+      why:'Fetches user wallet balance, membership status and auth token. Enables wallet deduction and auto-login for guest users.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "user_phone": "9876543210",\n  "user_email": "user@example.com"\n}',
+      res:'{\n  "data": {\n    "user": {\n      "id": "USERID_1234",\n      "token": "eyJhbGci...",\n      "wallet_balance": 500,\n      "member": true,\n      "membership_type": "Premium"\n    }\n  }\n}'},
+    'apply-wallet-credit':{p:'/apply-wallet-credit',tag:'OPTIONAL',tc:'s3',n:'Apply Wallet Credit',
+      why:'Deducts wallet balance from order total. Always call get-user first to check available balance.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "customer_phone": "9876543210"\n}',
+      res:'{\n  "data": {"cart": {"wallet_credit_used":400,"total":1600}}\n}'},
+    'remove-wallet-credit':{p:'/remove-wallet-credit',tag:'OPTIONAL',tc:'s3',n:'Remove Wallet Credit',
+      why:'Removes wallet credit from cart and restores original total.',
+      req:'{\n  "cart_id": "<cart_id>"\n}',
+      res:'{\n  "data": {"cart": {"wallet_credit_used":0,"total":2000}}\n}'},
+    'get-membership-items':{p:'/get-membership-items',tag:'OPTIONAL',tc:'s3',n:'Get Membership Items',
+      why:'Lists membership plans the user can purchase at checkout.',
+      req:'{\n  "cart_id": "<cart_id>"\n}',
+      res:'{\n  "data": {\n    "available_membership": [{"id":"PMEM_399","title":"Premium Membership","price":399}]\n  }\n}'},
+    'add-membership':{p:'/add-membership',tag:'OPTIONAL',tc:'s3',n:'Add Membership',
+      why:'Adds membership to cart. Membership cost increases total but membership_discount reduces it — net benefit to customer.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "membership_id": "PMEM_399"\n}',
+      res:'{\n  "data": {"cart": {"membership_discount":500,"total":1899}}\n}'},
+    'get-inventory-status':{p:'/get-inventory-status',tag:'OPTIONAL',tc:'s3',n:'Get Inventory Status',
+      why:'Checks live stock before order placement. Prevents orders for out-of-stock items (ADONC prevention).',
+      req:'{\n  "cart_id": "<cart_id>"\n}',
+      res:'{\n  "data": {\n    "cart": {\n      "items": [{"sku":"ACB123","salable_qty":5,"stock_status":"in_stock"}]\n    }\n  }\n}'},
+    'check-order-exists':{p:'/check-order-exists',tag:'MANDATORY',tc:'tr',n:'Check Order Exists',
+      why:'Prevents duplicate orders on payment retry. BOTH responses return HTTP 200 — check for order_id field, NOT the status code.',
+      req:'{\n  "session_key": "<checkout_session_id>",\n  "customer_phone": "<phone>"\n}',
+      res:'// Order EXISTS (HTTP 200):\n{"order_id":"ORD67223","message":"Order exists."}\n\n// No order found (also HTTP 200 — always check order_id!):\n{"message":"No order found."}'},
+    'create-order':{p:'/create-order',tag:'OPTIONAL',tc:'s3',n:'Create Order (Draft)',
+      why:'Creates a PENDING draft before payment for inventory reservation. If skipped, place-order handles create + confirm in one step.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "payment_details": {\n    "payment_method": "prepaid",\n    "payment_amount": 1900,\n    "payment_id": "PAY_abc123"\n  },\n  "shipping_address": {}\n}',
+      res:'{\n  "order_id": "ORD_DRAFT_123"\n}  // PENDING state'},
+    'place-order':{p:'/place-order',tag:'MANDATORY',tc:'tr',n:'Place Order',
+      why:'The FINAL step — confirms the order after payment is collected. Must be called after every successful payment gateway transaction.',
+      req:'{\n  "cart_id": "<cart_id>",\n  "payment_details": {\n    "payment_method": "prepaid",\n    "payment_amount": 1900,\n    "payment_id": "PAY_abc123",\n    "payment_instrument": "upi",\n    "pg_payment_trnx_id": "PG_xyz789"\n  },\n  "shipping_address": {\n    "first_name":"John","last_name":"Doe",\n    "phone":"9999999999","email":"john@example.com",\n    "address":"123 Main St","pincode":"110001",\n    "city":"New Delhi","state":"Delhi"\n  },\n  "billing_address": {},\n  "customer_phone": "9999999999",\n  "meta_data": {"gokwik_order_id":"GK_ORD_123","rto_risk_flag":"Low"}\n}',
+      res:'// Success:\n{"status":"success","order_id":"ORD123"}\n\n// Failed:\n{"status":"failed","reason":"product not available"}\n\n// Auth error:\n{"error":"Invalid or expired access_token"}'},
+    'update-order':{p:'/v3/orders/update',tag:'MANDATORY',tc:'tr',n:'Update Order (RTO)',
+      why:'Pushes delivery status to GoKwik. Without this GoKwik cannot track RTO outcomes or improve COD risk scoring.',
+      req:'{\n  "merchant_order_id": "ORD123",\n  "order_status": "Confirmed",\n  "awb_number": "AWB001",\n  "awb_status": "Shipped",\n  "shipping_provider": "Delhivery"\n}',
+      res:'{\n  "order": {\n    "merchant_order_id": "ORD123",\n    "status": "delivered",\n    "payment_method": "prepaid",\n    "total": 1900\n  }\n}'}
+  };
+  var html='';
+  html+='<div style="background:var(--green-dim);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--green);display:flex;gap:8px;align-items:flex-start">'
+    +'<span>&#128203;</span><div><strong>Your API set</strong> &mdash; '+apiList.length+' APIs selected by your GoKwik SE. Expand each to see purpose, request &amp; response.</div></div>';
+  html+='<div style="background:var(--acc-dim);border-left:3px solid var(--acc);padding:8px 12px;border-radius:0 7px 7px 0;margin-bottom:12px;font-size:11.5px">'
+    +'<strong>Required headers (Checkout APIs):</strong> <code>x-gk-checksum</code> &nbsp;&middot;&nbsp; <code>x-gk-merchant-id</code> &nbsp;&middot;&nbsp; <code>content-type: application/json</code>'
+    +'<div style="margin-top:3px;color:var(--text3)">&#9888; <code>/v3/orders/update</code> uses: <code>gk-app-id</code> &middot; <code>gk-app-secret</code></div></div>';
+  apiList.forEach(function(id,idx){
+    var a=AD[id];
+    if(!a)return;
+    var sid='ail-'+idx;
+    html+='<div style="border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden">'
+      +'<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;background:var(--bg3);user-select:none" onclick="(function(el){var b=document.getElementById(\''+sid+'\');var open=b.style.display!==\'none\';b.style.display=open?\'none\':\'block\';el.querySelector(\'.arr\').style.transform=open?\'rotate(0deg)\':\'rotate(180deg)\'})(this)">'
+      +'<span style="background:var(--bg-input);font-family:monospace;font-size:10px;padding:2px 6px;border-radius:3px;color:var(--acc);font-weight:700">POST</span>'
+      +'<code style="font-size:12px;color:var(--acc);flex-shrink:0">'+a.p+'</code>'
+      +'<span class="tag '+a.tc+'" style="font-size:9.5px;flex-shrink:0">'+a.tag+'</span>'
+      +'<span style="font-size:13px;font-weight:600;flex:1">'+a.n+'</span>'
+      +'<svg class="arr" width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;transition:.2s"><path d="M2.5 4l3.5 4 3.5-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      +'</div>'
+      +'<div id="'+sid+'" style="display:none;padding:12px 14px;background:var(--bg4)">'
+      +'<div style="background:var(--blue-dim);border-left:3px solid var(--blue);padding:9px 12px;border-radius:0 7px 7px 0;margin-bottom:12px;font-size:12.5px;color:var(--text2)"><strong style="color:var(--blue)">&#128161; Purpose: </strong>'+a.why+'</div>'
+      +'<div style="font-size:10.5px;font-weight:700;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em">Request Body</div>'
+      +'<pre style="margin-bottom:12px">'+a.req+'</pre>'
+      +'<div style="font-size:10.5px;font-weight:700;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em">Response</div>'
+      +'<pre style="margin-bottom:0">'+a.res+'</pre>'
+      +'</div></div>';
+  });
+  return html;
+}
 function renderAPIRef(){
   var apis=[
     {p:'/get-cart',tag:'MANDATORY',tc:'tr',n:'GET CART',
@@ -1381,7 +1518,13 @@ function kpCopy(btn,preId){var pre=document.getElementById(preId);if(!pre)return
 function copyCode(btn,text){navigator.clipboard.writeText(text).then(function(){var o=btn.innerHTML;btn.innerHTML='Copied!';btn.style.color='var(--green)';setTimeout(function(){btn.innerHTML=o;btn.style.color='var(--text2)';},2000);});}
 function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
 document.addEventListener('DOMContentLoaded',function(){
-  loadMerchants();
+  if(!loadMerchants()){
+    // First load or localStorage lost — show hint after app loads
+    setTimeout(function(){
+      var banner=document.getElementById('import-hint-banner');
+      if(banner)banner.style.display='flex';
+    },800);
+  }
   customLogo=(function(){try{return localStorage.getItem('ka_custom_logo')||null;}catch(e){return null;}})();
   if(customLogo)applyLogo();
   if(loadSession()){showApp();}else{prefillMerchant();}
