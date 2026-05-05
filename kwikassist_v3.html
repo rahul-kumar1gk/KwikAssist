@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KwikAssist — GoKwik Merchant Portal</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPCEtLSBEYXJrIGJsdWUgYmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzBkMmQ2ZSIvPgogIDwhLS0gR29sZCBsZWZ0IGNoZXZyb24vYXJyb3cgc2hhcGUgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxMiwyMCAyNiwzMiAxMiw0NCAyMCw0NCAzNCwzMiAyMCwyMCIgZmlsbD0iI2Y1YTYyMyIvPgogIDwhLS0gR29sZCByaWdodCBhcnJvdy9jaGVja21hcmsgc2hhcGUgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIyOCwyMCA0MiwzMiAyOCw0NCAzNiw0NCA1MCwzMiAzNiwyMCIgZmlsbD0iI2YwYzA0MCIgb3BhY2l0eT0iMC45Ii8+Cjwvc3ZnPg==">
-<link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPCEtLSBEYXJrIGJsdWUgYmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzBkMmQ2ZSIvPgogIDwhLS0gR29sZCBsZWZ0IGNoZXZyb24vYXJyb3cgc2hhcGUgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxMiwyMCAyNiwzMiAxMiw0NCAyMCw0NCAzNCwzMiAyMCwyMCIgZmlsbD0iI2Y1YTYyMyIvPgogIDwhLS0gR29sZCByaWdodCBhcnJvdy9jaGVja21hcmsgc2hhcGUgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIyOCwyMCA0MiwzMiAyOCw0NCAzNiw0NCA1MCwzMiAzNiwyMCIgZmlsbD0iI2YwYzA0MCIgb3BhY2l0eT0iMC45Ii8+Cjwvc3ZnPg==">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMwZDI5NTciLz48cG9seWxpbmUgcG9pbnRzPSIxNCwxNiAzNCwzMiAxNCw0OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjVBNjIzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cG9seWxpbmUgcG9pbnRzPSIzMiwxNiA1MiwzMiAzMiw0OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjVBNjIzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -233,7 +232,7 @@ button,input,select,textarea{font-family:var(--font)}
     <p class="login-hint">admin / gokwik@123</p>
   </div>
   <div id="lf-merchant" style="display:none">
-    <div class="form-mg"><label class="form-lbl">Merchant ID (MID)</label><input class="fi" id="mm" placeholder="GK_MER_XXXXXXXX"></div>
+    <div class="form-mg"><label class="form-lbl">Merchant ID (MID) (Sandbox)</label><input class="fi" id="mm" placeholder="GK_MER_XXXXXXXX"></div>
     <div class="form-mg"><label class="form-lbl">App Secret (Sandbox)</label><input class="fi" type="password" id="ms" placeholder="sk_sandbox_..."></div>
     <button class="btn-login" onclick="doMerchantLogin()">Access My Portal</button>
     <p class="login-hint" id="saved-hint" style="color:var(--green)"></p>
@@ -390,11 +389,12 @@ button,input,select,textarea{font-family:var(--font)}
   </div>
   <div class="modal-body">
     <div id="mt-info-body">
-      <div class="form-row"><div class="fg"><label>Name <span>*</span></label><input class="fi" id="f-name" placeholder="Brand name"></div><div class="fg"><label>MID <span>*</span></label><input class="fi" id="f-mid" placeholder="GK_MER_XXXXXX"></div></div>
+      <div class="form-row"><div class="fg"><label>Name <span>*</span></label><input class="fi" id="f-name" placeholder="Brand name"></div><div class="fg"><label>MID <span>*</span> <span style="font-size:10.5px;background:rgba(34,197,94,.12);color:var(--green);padding:1px 8px;border-radius:8px;font-weight:600;border:1px solid rgba(34,197,94,.25)">Production</span></label><input class="fi" id="f-mid" placeholder="GK_MER_XXXXXX"></div></div>
       <div class="form-row"><div class="fg"><label>Platform</label><select class="fi" id="f-platform"><option>Custom</option><option>WooCommerce</option><option>Shopify</option><option>Magento</option><option>OpenCart</option></select></div><div class="fg"><label>Category</label><input class="fi" id="f-category" placeholder="Fashion, Electronics..."></div></div>
       <div class="form-row" style="grid-template-columns:1fr 1fr 1fr"><div class="fg"><label>ARR (Cr)</label><input class="fi" type="number" step="0.01" id="f-arr" placeholder="0.00"></div><div class="fg"><label>Txns/Day</label><input class="fi" type="number" id="f-txns" placeholder="0"></div><div class="fg"><label>AOV (Rs)</label><input class="fi" type="number" id="f-aov" placeholder="0"></div></div>
       <div class="form-row"><div class="fg"><label>Sales SPOC</label><input class="fi" id="f-spoc" placeholder="Sales owner"></div><div class="fg"><label>Integration Type</label><select class="fi" id="f-inttype"><option>Checkout Advanced</option><option>Checkout Lite</option><option>Magento</option><option>WooCommerce Plugin</option></select></div></div>
       <div class="form-row"><div class="fg"><label>Payment Gateways</label><input class="fi" id="f-pg" placeholder="Razorpay, PayU..."></div><div class="fg"><label>SE Owner</label><input class="fi" id="f-owner" placeholder="Solutions Engineer"></div></div>
+      <div class="form-row"><div class="fg"><label>Onboarding Manager</label><input class="fi" id="f-ob-manager" placeholder="Onboarding Manager name"></div><div class="fg"><label>Sales Manager</label><input class="fi" id="f-sales-manager" placeholder="Sales Manager name"></div></div>
       <div class="form-row"><div class="fg"><label>Stage</label><select class="fi" id="f-stage"><option value="0">1. Requirement Gathering</option><option value="1">2. API Walkthrough</option><option value="2">3. API Build &amp; SDK Integration</option><option value="3">4. API Validation</option><option value="4">5. Under Integration</option><option value="5">6. Integration Complete</option><option value="6">7. Sandbox Testing</option><option value="7">8. Production Testing</option><option value="8">9. Production Validation</option><option value="9">10. Go-Live</option></select></div><div class="fg"><label>Website URL</label><input class="fi" id="f-url" placeholder="https://merchant.com"></div></div>
     </div>
     <div id="mt-links-body" style="display:none">
@@ -445,6 +445,16 @@ button,input,select,textarea{font-family:var(--font)}
             <div style="font-size:11.5px;color:var(--text2);margin-top:2px">When enabled, merchant will see the KwikPass Integration Guide in their Documents tab. Uncheck to hide it.</div>
           </div>
         </label>
+      </div>
+      <div class="fg" style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div>
+            <label style="margin-bottom:0;font-size:12.5px;font-weight:700">JIRA Links <span style="background:var(--acc-dim);color:var(--acc);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px">Admin Only</span></label>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px">Not visible to merchant. Only admin sees these links.</div>
+          </div>
+          <button type="button" onclick="addJiraRow()" style="background:var(--acc-dim);color:var(--acc);border:1px solid rgba(232,24,77,.2);border-radius:7px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer">+ Add</button>
+        </div>
+        <div id="jira-rows-container" style="display:flex;flex-direction:column;gap:8px"></div>
       </div>
       <div class="fg"><label>KP Token JWE Production Decryption Key</label><input class="fi" id="f-kpprodkey" placeholder="Production JWE secret key" style="font-family:monospace"></div>
       <div class="cred-sec"><div class="cred-sec-title">Sandbox</div>
@@ -604,23 +614,50 @@ function goBackAdmin(){user={type:'admin'};saveSession();document.getElementById
 function getTaskState(mid,si){if(!taskState[mid])taskState[mid]={};var tasks=STAGE_TASKS[si]||[];if(!taskState[mid][si]){var m=merchants.find(function(x){return x.id===mid;});taskState[mid][si]=tasks.map(function(){return m&&si<m.stage?true:false;});}return taskState[mid][si];}
 function toggleTask(mid,si,ti){getTaskState(mid,si)[ti]=!getTaskState(mid,si)[ti];document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();}
 function allTasksDone(mid,si){var s=getTaskState(mid,si),t=STAGE_TASKS[si]||[];return t.length>0&&s.length===t.length&&s.every(function(x){return x;});}
-function advanceFromTasks(mid){var m=getM(mid),ns=m.stage+1;if(ns>9)return;m.stage=ns;if(!taskState[mid])taskState[mid]={};delete taskState[mid][ns];saveMerchants();syncEnvBadges(m);document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();if(user&&user.type==='admin'){renderStats();renderMerchants();renderStagePills();}showToast('Advanced to Stage '+(ns+1)+': '+STAGES[ns].n);}
+
+function stampStageDate(m, completedStage){
+  if(!m.stageDates) m.stageDates = {};
+  // Only stamp if not already recorded (don't overwrite history)
+  if(!m.stageDates[completedStage]){
+    var now = new Date();
+    m.stageDates[completedStage] = now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})
+      + ' ' + now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
+  }
+}
+
+function advanceFromTasks(mid){var m=getM(mid),ns=m.stage+1;if(ns>9)return;stampStageDate(m,m.stage);m.stage=ns;if(!taskState[mid])taskState[mid]={};delete taskState[mid][ns];saveMerchants();syncEnvBadges(m);document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();if(user&&user.type==='admin'){renderStats();renderMerchants();renderStagePills();}showToast('Advanced to Stage '+(ns+1)+': '+STAGES[ns].n);}
 function syncEnvBadges(m){document.getElementById('sb-tag').className='tag tg';document.getElementById('prod-tag').className=m.stage>=9?'tag tg':'tag ta';document.getElementById('prod-tag').textContent=m.stage>=9?'ACTIVE':'PENDING';}
 function renderStats(){var tot=merchants.length,live=merchants.filter(function(m){return m.stage===9;}).length,prog=merchants.filter(function(m){return m.stage>0&&m.stage<9;}).length,avgAov=tot?Math.round(merchants.reduce(function(a,m){return a+Number(m.aov||0);},0)/tot):0;document.getElementById('adm-stats').innerHTML='<div class="stat"><div class="stat-lbl">Total Projects</div><div class="stat-val">'+tot+'</div></div><div class="stat"><div class="stat-lbl">In Progress</div><div class="stat-val" style="color:var(--amber)">'+prog+'</div></div><div class="stat"><div class="stat-lbl">Go-Live</div><div class="stat-val" style="color:var(--green)">'+live+'</div></div><div class="stat"><div class="stat-lbl">Avg AOV</div><div class="stat-val">Rs'+avgAov.toLocaleString()+'</div></div>';}
 function renderStagePills(){var h='<div class="fpill '+(stageFilter==='all'?'on':'')+'" onclick="setSF(\'all\')">All ('+merchants.length+')</div>';STAGES.forEach(function(s,i){var c=merchants.filter(function(m){return m.stage===i;}).length;if(c)h+='<div class="fpill '+(stageFilter===i?'on':'')+'" onclick="setSF('+i+')">'+(i+1)+'. '+s.s+' ('+c+')</div>';});document.getElementById('stage-pills').innerHTML=h;}
 function setSF(v){stageFilter=v;renderStagePills();filterM();}
 function filterM(){renderMerchants();}
 function renderMerchants(){var q=(document.getElementById('s-inp').value||'').toLowerCase();var sort=document.getElementById('sort-sel').value;var list=merchants.filter(function(m){var qm=!q||(m.name.toLowerCase().includes(q)||m.mid.toLowerCase().includes(q)||(m.category||'').toLowerCase().includes(q));var sm=stageFilter==='all'||m.stage===stageFilter;return qm&&sm;});if(sort==='name')list.sort(function(a,b){return a.name.localeCompare(b.name);});else if(sort==='stage')list.sort(function(a,b){return a.stage-b.stage;});else list.sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});document.getElementById('proj-count').textContent=list.length+' project'+(list.length!==1?'s':'')+' found';var ml=document.getElementById('mc-list'),nd=document.getElementById('no-mc');if(!list.length){ml.innerHTML='';nd.style.display='block';return;}nd.style.display='none';ml.innerHTML=list.map(function(m){var s=STAGES[m.stage],ini=m.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();return '<div class="mc"><div><div class="mc-top"><div class="mc-logo">'+ini+'</div><div><div class="mc-name">'+m.name+'</div><div class="mc-url">'+(m.url||'&mdash;')+'</div></div><span class="sbadge '+s.c+'" style="margin-left:8px">'+(m.stage+1)+'. '+s.s+'</span></div><div class="mc-meta"><span class="mci"><strong>'+m.platform+'</strong></span><span class="mci">ARR: <strong>'+(m.arr||0)+' Cr</strong></span><span class="mci"><strong>'+(m.txns||0)+'</strong>/day</span><span class="mci">AOV: <strong>Rs'+Number(m.aov||0).toLocaleString()+'</strong></span><span class="mci"><strong>'+m.intType+'</strong></span><span class="mci"><strong>'+(m.owner||'&mdash;')+'</strong></span></div></div><div class="mc-actions"><button class="btn btn-acc btn-sm" onclick="viewMerchant(\''+m.id+'\')">View Details</button><button class="btn btn-out btn-sm" onclick="openEdit(\''+m.id+'\')">Edit</button><div style="display:flex;gap:5px"><button class="btn btn-out btn-sm" onclick="moveStage(\''+m.id+'\',-1)" '+(m.stage===0?'disabled style="opacity:.4"':'')+'>&#8592; Stage</button><button class="btn btn-green btn-sm" onclick="moveStage(\''+m.id+'\',1)" '+(m.stage===9?'disabled style="opacity:.4"':'')+'>Stage &#8594;</button></div><button class="btn btn-out btn-sm" onclick="openBRDDirect(\''+m.id+'\')" style="font-size:11px">Upload BRD</button><button class="btn btn-danger btn-sm" onclick="openDel(\''+m.id+'\')">Delete</button></div></div>';}).join('');}
-function moveStage(id,dir){var m=getM(id),ns=m.stage+dir;if(ns<0||ns>9)return;m.stage=ns;if(taskState[id])delete taskState[id][ns];saveMerchants();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ns+1)+': '+STAGES[ns].n);}
+function moveStage(id,dir){var m=getM(id),ns=m.stage+dir;if(ns<0||ns>9)return;if(dir>0)stampStageDate(m,m.stage);m.stage=ns;if(taskState[id])delete taskState[id][ns];saveMerchants();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ns+1)+': '+STAGES[ns].n);}
 function viewMerchant(id){user={type:'merchant',id:id};saveSession();navHistory=[];var m=getM(id);document.getElementById('tb-badge').textContent='Merchant';document.getElementById('tb-badge').className='tb-badge bm';document.getElementById('tb-av').textContent=m.name[0];document.getElementById('tb-name').textContent=m.name;document.getElementById('tb-search-wrap').style.display='none';document.getElementById('tb-back-btn').style.display='inline-flex';document.getElementById('logo-upload-btn').style.display='flex';var tw=document.getElementById('tb-logo-wrap');if(tw){tw.onclick=function(){showTab('dashboard',document.getElementById('nav-dashboard'));};tw.style.cursor='pointer';tw.title='Go to My Integration';}document.getElementById('sb-admin-back').style.display='block';document.getElementById('admin-view').style.display='none';document.getElementById('merchant-view').style.display='flex';document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});document.getElementById('nav-dashboard').classList.add('active');syncEnvBadges(m);if(customLogo)applyLogo();document.getElementById('portal-main').innerHTML=renderDashboard(getM(id));showAdminBar();}
-function adminJumpStage(mid,ts){var bb=document.getElementById('tb-back-btn');if(!bb||bb.style.display==='none'){showToast('Admin only');return;}var m=getM(mid);if(!m||ts===m.stage)return;m.stage=ts;if(taskState[mid])delete taskState[mid][ts];saveMerchants();syncEnvBadges(m);document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ts+1)+': '+STAGES[ts].n);}
+function adminJumpStage(mid,ts){var bb=document.getElementById('tb-back-btn');if(!bb||bb.style.display==='none'){showToast('Admin only');return;}var m=getM(mid);if(!m||ts===m.stage)return;if(ts>m.stage){for(var _si=m.stage;_si<ts;_si++)stampStageDate(m,_si);}m.stage=ts;if(taskState[mid])delete taskState[mid][ts];saveMerchants();syncEnvBadges(m);document.getElementById('portal-main').innerHTML=renderDashboard(getM(mid));showAdminBar();renderStats();renderMerchants();renderStagePills();showToast(m.name+' moved to Stage '+(ts+1)+': '+STAGES[ts].n);}
 function showAdminBar(){var bar=document.getElementById('admin-stage-bar');if(!bar)return;var bb=document.getElementById('tb-back-btn');bar.style.display=(bb&&bb.style.display!=='none')?'flex':'none';}
 function openAdd(){editId=null;document.getElementById('m-title').textContent='Add New Project';document.getElementById('m-save-btn').textContent='Add Project';clearForm();document.getElementById('f-d1').value=new Date().toISOString().split('T')[0];setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
-function openEdit(id){editId=id;var m=getM(id);document.getElementById('m-title').textContent='Edit Project';document.getElementById('m-save-btn').textContent='Save Changes';document.getElementById('f-name').value=m.name||'';document.getElementById('f-mid').value=m.mid||'';document.getElementById('f-platform').value=m.platform||'Custom';document.getElementById('f-category').value=m.category||'';document.getElementById('f-arr').value=m.arr||'';document.getElementById('f-txns').value=m.txns||'';document.getElementById('f-aov').value=m.aov||'';document.getElementById('f-spoc').value=m.spoc||'';document.getElementById('f-inttype').value=m.intType||'Checkout Advanced';document.getElementById('f-pg').value=m.pg||'';document.getElementById('f-owner').value=m.owner||'';document.getElementById('f-stage').value=m.stage||0;document.getElementById('f-url').value=m.url||'';document.getElementById('f-brd').value=m.brd||'';document.getElementById('f-apidoc').value=m.apidoc||'';document.getElementById('f-postman').value=m.postman||'';document.getElementById('f-d1').value=m.d1||'';document.getElementById('f-d2').value=m.d2||'';document.getElementById('f-sla').value=m.sla||'';document.getElementById('f-configid').value=m.configId||'';document.getElementById('f-kpprodkey').value=m.kpProdKey||'';var kpCb=document.getElementById('f-kp-enabled');if(kpCb)kpCb.checked=m.kpEnabled===true;document.getElementById('f-sb-mid').value=m.sb.mid||'';document.getElementById('f-sb-app').value=m.sb.app||'';document.getElementById('f-sb-sec').value=m.sb.sec||'';document.getElementById('f-sb-url').value=m.sb.url||'';document.getElementById('f-pr-mid').value=m.prod.mid||'';document.getElementById('f-pr-app').value=m.prod.app||'';document.getElementById('f-pr-sec').value=m.prod.sec||'';document.getElementById('f-pr-url').value=m.prod.url||'';_currentApiList=(m.apiList||[]).slice();document.getElementById('f-notes').value=m.notes||'';document.getElementById('f-se-email').value=m.seEmail||'';document.getElementById('f-merch-email').value=m.mEmail||'';brdFileData=m.brdFile||null;brdFileType=m.brdFileType||null;window._origCreds={sb:JSON.parse(JSON.stringify(m.sb||{})),prod:JSON.parse(JSON.stringify(m.prod||{})),kpProdKey:m.kpProdKey||''};var bs=document.getElementById('brd-upload-st');if(bs){bs.style.display=m.brdFile?'block':'none';bs.textContent=m.brdFile?'File uploaded':'';}
+function openEdit(id){editId=id;var m=getM(id);document.getElementById('m-title').textContent='Edit Project';document.getElementById('m-save-btn').textContent='Save Changes';document.getElementById('f-name').value=m.name||'';document.getElementById('f-mid').value=m.mid||'';document.getElementById('f-platform').value=m.platform||'Custom';document.getElementById('f-category').value=m.category||'';document.getElementById('f-arr').value=m.arr||'';document.getElementById('f-txns').value=m.txns||'';document.getElementById('f-aov').value=m.aov||'';document.getElementById('f-spoc').value=m.spoc||'';document.getElementById('f-inttype').value=m.intType||'Checkout Advanced';document.getElementById('f-pg').value=m.pg||'';document.getElementById('f-owner').value=m.owner||'';document.getElementById('f-ob-manager').value=m.obManager||'';document.getElementById('f-sales-manager').value=m.salesManager||'';document.getElementById('f-stage').value=m.stage||0;document.getElementById('f-url').value=m.url||'';document.getElementById('f-brd').value=m.brd||'';document.getElementById('f-apidoc').value=m.apidoc||'';document.getElementById('f-postman').value=m.postman||'';document.getElementById('f-d1').value=m.d1||'';document.getElementById('f-d2').value=m.d2||'';document.getElementById('f-sla').value=m.sla||'';document.getElementById('f-configid').value=m.configId||'';document.getElementById('f-kpprodkey').value=m.kpProdKey||'';var kpCb=document.getElementById('f-kp-enabled');if(kpCb)kpCb.checked=m.kpEnabled===true;document.getElementById('f-sb-mid').value=m.sb.mid||'';document.getElementById('f-sb-app').value=m.sb.app||'';document.getElementById('f-sb-sec').value=m.sb.sec||'';document.getElementById('f-sb-url').value=m.sb.url||'';document.getElementById('f-pr-mid').value=m.prod.mid||'';document.getElementById('f-pr-app').value=m.prod.app||'';document.getElementById('f-pr-sec').value=m.prod.sec||'';document.getElementById('f-pr-url').value=m.prod.url||'';_currentApiList=(m.apiList||[]).slice();document.getElementById('f-notes').value=m.notes||'';setTimeout(function(){populateJiraLinks(m.jiraLinks||[]);},50);document.getElementById('f-se-email').value=m.seEmail||'';document.getElementById('f-merch-email').value=m.mEmail||'';brdFileData=m.brdFile||null;brdFileType=m.brdFileType||null;window._origCreds={sb:JSON.parse(JSON.stringify(m.sb||{})),prod:JSON.parse(JSON.stringify(m.prod||{})),kpProdKey:m.kpProdKey||''};var bs=document.getElementById('brd-upload-st');if(bs){bs.style.display=m.brdFile?'block':'none';bs.textContent=m.brdFile?'File uploaded':'';}
 var kpst=document.getElementById('kpdoc-upload-st');if(kpst){kpst.textContent=m.kpDoc?'✅ KwikPass PDF uploaded':'No file uploaded';kpst.style.color=m.kpDoc?'var(--green)':'var(--text2)';}
 window._kpDocData=null;setMT('info',document.getElementById('mt-info'));document.getElementById('m-modal').classList.add('show');}
-function clearForm(){['f-name','f-mid','f-category','f-arr','f-txns','f-aov','f-spoc','f-pg','f-owner','f-url','f-brd','f-apidoc','f-postman','f-d1','f-d2','f-sla','f-configid','f-kpprodkey','f-sb-mid','f-sb-app','f-sb-sec','f-pr-mid','f-pr-app','f-pr-sec','f-notes','f-se-email','f-merch-email'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});document.getElementById('f-sb-url').value='https://sandbox.api.gokwik.co';document.getElementById('f-pr-url').value='https://api.gokwik.co';document.getElementById('f-platform').value='Custom';document.getElementById('f-inttype').value='Checkout Advanced';document.getElementById('f-stage').value='0';brdFileData=null;brdFileType=null;window._apiDocData=null;window._kpDocData=null;_currentApiList=[];var kpCb2=document.getElementById('f-kp-enabled');if(kpCb2)kpCb2.checked=false;var kpst2=document.getElementById('kpdoc-upload-st');if(kpst2){kpst2.textContent='No file uploaded';kpst2.style.color='var(--text2)';}}
-function saveMerchant(){var name=document.getElementById('f-name').value.trim(),mid=document.getElementById('f-mid').value.trim();if(!name){showToast('Name required');return;}if(!mid){showToast('MID required');return;}var d={name:name,mid:mid,platform:document.getElementById('f-platform').value,category:document.getElementById('f-category').value,arr:document.getElementById('f-arr').value,txns:+document.getElementById('f-txns').value||0,aov:+document.getElementById('f-aov').value||0,spoc:document.getElementById('f-spoc').value,intType:document.getElementById('f-inttype').value,pg:document.getElementById('f-pg').value,stage:+document.getElementById('f-stage').value,owner:document.getElementById('f-owner').value,url:document.getElementById('f-url').value,brd:document.getElementById('f-brd').value,apidoc:document.getElementById('f-apidoc').value,postman:document.getElementById('f-postman').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,sla:+document.getElementById('f-sla').value||30,configId:document.getElementById('f-configid').value.trim(),kpProdKey:(function(){var v=document.getElementById('f-kpprodkey').value.trim();return v||(editId&&window._origCreds?window._origCreds.kpProdKey:'');}()),sb:(function(){var oc=(editId&&window._origCreds)?window._origCreds.sb:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-sb-mid')||(oc.mid||mid),app:fv('f-sb-app')||(oc.app||''),sec:fv('f-sb-sec')||(oc.sec||''),url:fv('f-sb-url')||(oc.url||'https://sandbox.api.gokwik.co')};}()),prod:(function(){var oc2=(editId&&window._origCreds)?window._origCreds.prod:{};var fv=function(id){return document.getElementById(id).value.trim();};return {mid:fv('f-pr-mid')||(oc2.mid||''),app:fv('f-pr-app')||(oc2.app||''),sec:fv('f-pr-sec')||(oc2.sec||''),url:fv('f-pr-url')||(oc2.url||'https://api.gokwik.co')};}()),notes:document.getElementById('f-notes').value,apidoc:(window._apiDocData||'').length>0?window._apiDocData:document.getElementById('f-apidoc').value.trim(),apiList:getSelectedApiList(),seEmail:document.getElementById('f-se-email').value,mEmail:document.getElementById('f-merch-email').value,kpEnabled:(function(){var cb=document.getElementById('f-kp-enabled');return cb?cb.checked:false;}())};if(brdFileData){d.brdFile=brdFileData;d.brdFileType=brdFileType;}if(window._kpDocData){d.kpDoc=window._kpDocData;}else if(editId){var em=merchants.find(function(x){return x.id===editId;});if(em&&em.kpDoc)d.kpDoc=em.kpDoc;}if(editId){var i=merchants.findIndex(function(m){return m.id===editId;});merchants[i]=Object.assign(merchants[i],d);showToast('Project updated!');}else{d.id='M'+Date.now();d.createdAt=new Date().toISOString().split('T')[0];merchants.unshift(d);showToast('Project added!');}saveMerchants();brdFileData=null;brdFileType=null;closeModal('m-modal');renderStats();renderMerchants();renderStagePills();}
+function clearForm(){['f-name','f-mid','f-category','f-arr','f-txns','f-aov','f-spoc','f-pg','f-owner','f-ob-manager','f-sales-manager','f-url','f-brd','f-apidoc','f-postman','f-d1','f-d2','f-sla','f-configid','f-kpprodkey','f-sb-mid','f-sb-app','f-sb-sec','f-pr-mid','f-pr-app','f-pr-sec','f-notes','f-se-email','f-merch-email'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});document.getElementById('f-sb-url').value='https://sandbox.api.gokwik.co';document.getElementById('f-pr-url').value='https://api.gokwik.co';document.getElementById('f-platform').value='Custom';document.getElementById('f-inttype').value='Checkout Advanced';document.getElementById('f-stage').value='0';brdFileData=null;brdFileType=null;window._apiDocData=null;window._kpDocData=null;_currentApiList=[];var kpCb2=document.getElementById('f-kp-enabled');if(kpCb2)kpCb2.checked=false;var kpst2=document.getElementById('kpdoc-upload-st');if(kpst2){kpst2.textContent='No file uploaded';kpst2.style.color='var(--text2)';}}
+function saveMerchant(){var name=document.getElementById('f-name').value.trim(),mid=document.getElementById('f-mid').value.trim();if(!name){showToast('Name required');return;}if(!mid){showToast('MID required');return;}if(editId&&!window._origCreds){var _em=merchants.find(function(x){return x.id===editId;});if(_em)window._origCreds={sb:JSON.parse(JSON.stringify(_em.sb||{})),prod:JSON.parse(JSON.stringify(_em.prod||{})),kpProdKey:_em.kpProdKey||''}; }var d={name:name,mid:mid,platform:document.getElementById('f-platform').value,category:document.getElementById('f-category').value,arr:document.getElementById('f-arr').value,txns:+document.getElementById('f-txns').value||0,aov:+document.getElementById('f-aov').value||0,spoc:document.getElementById('f-spoc').value,intType:document.getElementById('f-inttype').value,pg:document.getElementById('f-pg').value,stage:+document.getElementById('f-stage').value,owner:document.getElementById('f-owner').value,obManager:document.getElementById('f-ob-manager').value.trim(),salesManager:document.getElementById('f-sales-manager').value.trim(),url:document.getElementById('f-url').value,brd:document.getElementById('f-brd').value,apidoc:document.getElementById('f-apidoc').value,postman:document.getElementById('f-postman').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,sla:+document.getElementById('f-sla').value||30,configId:document.getElementById('f-configid').value.trim(),kpProdKey:(function(){var oc=(editId&&window._origCreds)?window._origCreds:{};return _protectCred('f-kpprodkey', oc.kpProdKey);}()),sb:(function(){
+    var oc=(editId&&window._origCreds)?window._origCreds.sb:{};
+    return {
+      mid:_protectCred('f-sb-mid', oc.mid)||mid,
+      app:_protectCred('f-sb-app', oc.app),
+      sec:_protectCred('f-sb-sec', oc.sec),
+      url:_protectCred('f-sb-url', oc.url)||'https://sandbox.api.gokwik.co'
+    };
+  }()),prod:(function(){
+    var oc2=(editId&&window._origCreds)?window._origCreds.prod:{};
+    return {
+      mid:_protectCred('f-pr-mid', oc2.mid),
+      app:_protectCred('f-pr-app', oc2.app),
+      sec:_protectCred('f-pr-sec', oc2.sec),
+      url:_protectCred('f-pr-url', oc2.url)||'https://api.gokwik.co'
+    };
+  }()),notes:document.getElementById('f-notes').value,apidoc:(window._apiDocData||'').length>0?window._apiDocData:document.getElementById('f-apidoc').value.trim(),apiList:getSelectedApiList(),seEmail:document.getElementById('f-se-email').value,mEmail:document.getElementById('f-merch-email').value,jiraLinks:getJiraLinks(),kpEnabled:(function(){var cb=document.getElementById('f-kp-enabled');return cb?cb.checked:false;}())};if(brdFileData){d.brdFile=brdFileData;d.brdFileType=brdFileType;}if(window._kpDocData){d.kpDoc=window._kpDocData;}else if(editId){var em=merchants.find(function(x){return x.id===editId;});if(em&&em.kpDoc)d.kpDoc=em.kpDoc;}if(editId){var i=merchants.findIndex(function(m){return m.id===editId;});merchants[i]=Object.assign(merchants[i],d);showToast('Project updated!');}else{d.id='M'+Date.now();d.createdAt=new Date().toISOString().split('T')[0];merchants.unshift(d);showToast('Project added!');}saveMerchants();brdFileData=null;brdFileType=null;closeModal('m-modal');renderStats();renderMerchants();renderStagePills();}
 function setMT(t,el){
   document.querySelectorAll('.mtab').forEach(function(x){x.classList.remove('on');});el.classList.add('on');
   ['info','links','dates','creds','notes'].forEach(function(x){document.getElementById('mt-'+x+'-body').style.display=x===t?'block':'none';});
@@ -689,12 +726,17 @@ function showTab(tab,el,skipH){
 function parseNotes(str){
   if(!str)return[];
   return str.split('\n\n').filter(function(n){return n.trim();}).map(function(n){
-    var m=n.match(/^\[([^\]]+)\]\s*([\s\S]*)$/);
-    return m?{date:m[1],text:m[2].trim()}:{date:'',text:n.trim()};
+    // Format: [date|author] text  OR  [date] text  (legacy)
+    var m=n.match(/^\[([^|\]]+)\|?([^\]]*)\]\s*([\s\S]*)$/);
+    if(m)return{date:m[1].trim(),author:m[2].trim()||'merchant',text:m[3].trim()};
+    return{date:'',author:'merchant',text:n.trim()};
   });
 }
 function formatNotes(arr){
-  return arr.map(function(n){return n.date?('['+n.date+'] '+n.text):n.text;}).join('\n\n');
+  return arr.map(function(n){
+    var a=n.author||'merchant';
+    return n.date?('['+n.date+'|'+a+'] '+n.text):n.text;
+  }).join('\n\n');
 }
 function editNote(mid,idx){
   var m=getM(mid),notes=parseNotes(m.notes);
@@ -752,20 +794,37 @@ function showMerchantAPIDoc(mid){
   },200);
 }
 
+function filterNotes(mid,type){
+  var container=document.getElementById('notes-list-'+mid);
+  if(!container)return;
+  var items=container.querySelectorAll('.note-item');
+  items.forEach(function(item){
+    var author=item.getAttribute('data-author')||'merchant';
+    var show=(type==='all')||(type==='admin'&&(author==='admin'||author==='se'))||(type==='merchant'&&author==='merchant');
+    item.style.display=show?'':'none';
+  });
+  // Update pill styles
+  ['all','merchant','admin'].forEach(function(t){
+    var btn=document.getElementById('nf-'+t+'-'+mid);
+    if(!btn)return;
+    if(t===type){btn.style.background='var(--acc)';btn.style.color='#fff';btn.style.border='none';}
+    else{btn.style.background='var(--bg4)';btn.style.color='var(--text2)';btn.style.border='1px solid var(--border2)';}
+  });
+}
 function saveMerchantNote(mid){var ta=document.getElementById('merchant-note-input-'+mid);
   if(!ta||!ta.value.trim()){showToast('Please write a note first');return;}
   var m=getM(mid),notes=parseNotes(m.notes);
   var ie=document.getElementById('note-edit-idx-'+mid);
   var hint=document.getElementById('note-edit-hint-'+mid);
   var editIdx=(ie&&ie.textContent!=='')?parseInt(ie.textContent):-1;
-  var ts=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+  var now=new Date();var ts=now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' '+now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
   if(editIdx>=0&&editIdx<notes.length){
     notes[editIdx].text=ta.value.trim();
     if(ie)ie.textContent='';
     if(hint)hint.style.display='none';
     showToast('Note updated!');
   } else {
-    notes.push({date:ts,text:ta.value.trim()});
+    var noteAuthor=(user&&user.type==='admin')?'admin':'merchant';  notes.push({date:ts,author:noteAuthor,text:ta.value.trim()});
     showToast('Note saved!');
   }
   m.notes=formatNotes(notes);
@@ -781,23 +840,107 @@ function renderDashboard(m){
   var isAdmin=bb&&bb.style.display!=='none';
   var dots=STAGES.map(function(s,i){var cls=i<m.stage?'sdone':i===m.stage?'sactive':'sfuture';return '<div class="stage-dot-btn '+cls+'" onclick="adminJumpStage(\''+m.id+'\','+i+')" title="Stage '+(i+1)+'">'+(i<m.stage?'&#10003;':(i+1))+'</div>';}).join('');
   var stepsHtml='';
-  STAGES.forEach(function(s,i){var cls=i<m.stage?'done':i===m.stage?'active':'';var lCls=i<m.stage?'done-l':i===m.stage?'active-l':'';if(i>0)stepsHtml+='<div class="conn '+(i<=m.stage?'done-c':'')+'"></div>';stepsHtml+='<div class="step"><div class="step-c '+cls+'" '+(isAdmin?'onclick="adminJumpStage(\''+m.id+'\','+i+')" style="cursor:pointer"':'')+' >'+(i<m.stage?'&#10003;':(i+1))+'</div><div class="step-lbl '+lCls+'">'+s.s+'</div></div>';});
+  STAGES.forEach(function(s,i){var cls=i<m.stage?'done':i===m.stage?'active':'';var lCls=i<m.stage?'done-l':i===m.stage?'active-l':'';if(i>0)stepsHtml+='<div class="conn '+(i<=m.stage?'done-c':'')+'"></div>';stepsHtml+=(function(){
+      var stageDate=(isAdmin&&m.stageDates&&m.stageDates[i])?m.stageDates[i].split(' ').slice(0,2).join(' '):'';
+      var dateLbl=stageDate?'<div style="font-size:8px;color:var(--green);margin-top:2px;text-align:center;max-width:58px;line-height:1.2">'+stageDate+'</div>':'';
+      return '<div class="step"><div class="step-c '+cls+'" '+(isAdmin?'onclick="adminJumpStage(\''+m.id+'\','+i+')" style="cursor:pointer"':'')+' >'+(i<m.stage?'&#10003;':(i+1))+'</div><div class="step-lbl '+lCls+'">'+s.s+'</div>'+dateLbl+'</div>';
+    })();
+  });
+
   return '<div class="admin-stage-bar" id="admin-stage-bar"><div style="display:flex;align-items:center;gap:6px"><span style="font-size:11.5px;font-weight:700;color:var(--acc)">ADMIN</span><span style="font-size:11px;color:var(--text2)">Stage Controls</span></div><div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;flex:1">'+dots+'</div><div style="display:flex;gap:6px"><button class="btn btn-out btn-sm" onclick="adminJumpStage(\''+m.id+'\','+Math.max(0,m.stage-1)+')" '+(m.stage===0?'disabled style="opacity:.4"':'')+'>&#8592; Prev</button><button class="btn btn-green btn-sm" onclick="adminJumpStage(\''+m.id+'\','+Math.min(9,m.stage+1)+')" '+(m.stage===9?'disabled style="opacity:.4"':'')+'>Next &#8594;</button></div></div>'
   +'<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px"><div><div style="font-size:19px;font-weight:700">'+m.name+'</div><div style="font-size:12.5px;color:var(--text2);margin-top:2px">'+(m.url||'&mdash;')+' &middot; '+m.platform+' &middot; '+m.intType+'</div></div><span class="sbadge '+STAGES[m.stage].c+'" style="font-size:12px;padding:5px 12px">Stage '+(m.stage+1)+': '+STAGES[m.stage].n+'</span></div>'
   +'<div class="stage-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div><div style="font-size:14px;font-weight:700;margin-bottom:2px">Integration Roadmap</div><div style="font-size:12px;color:var(--text2)">Stage '+(m.stage+1)+' of 10 &mdash; '+STAGES[m.stage].n+'</div></div><div style="text-align:right"><div style="font-size:22px;font-weight:700;color:var(--acc)">'+pct+'%</div><div style="font-size:10px;color:var(--text3)">Complete</div></div></div><div class="spb"><div class="spb-fill" style="width:'+pct+'%"></div></div><div class="steps-row">'+stepsHtml+'</div></div>'
-  +'<div class="info-grid"><div class="info-card"><div class="ic-title">Stage '+(m.stage+1)+' Tasks</div>'
+  +(isAdmin&&m.stageDates&&Object.keys(m.stageDates).length?(function(){
+    var tl='<div class="info-card" style="margin-bottom:14px">';
+    tl+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span class="ic-title" style="margin-bottom:0">Stage Timeline</span><span style="background:var(--blue-dim);color:var(--blue);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid rgba(59,130,246,.25)">Admin Only</span></div>';
+    var dates=m.stageDates;
+    var keys=Object.keys(dates).map(Number).sort(function(a,b){return a-b;});
+    keys.forEach(function(si){
+      var s=STAGES[si];if(!s)return;
+      tl+='<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">';
+      tl+='<div style="width:24px;height:24px;border-radius:50%;background:var(--green-dim);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">&#10003;</div>';
+      tl+='<div style="flex:1;font-size:12.5px;font-weight:600">Stage '+(si+1)+': '+s.n+'</div>';
+      tl+='<span style="font-size:11.5px;color:var(--text3)">'+dates[si]+'</span>';
+      tl+='</div>';
+    });
+    if(!dates[m.stage]){
+      tl+='<div style="display:flex;align-items:center;gap:10px;padding:8px 0">';
+      tl+='<div style="width:24px;height:24px;border-radius:50%;background:var(--acc-dim);color:var(--acc);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(m.stage+1)+'</div>';
+      tl+='<div style="flex:1;font-size:12.5px;font-weight:600">Stage '+(m.stage+1)+': '+STAGES[m.stage].n+'</div>';
+      tl+='<span style="font-size:11px;background:var(--acc-dim);color:var(--acc);padding:2px 8px;border-radius:10px;font-weight:600">In Progress</span>';
+      tl+='</div>';
+    }
+    tl+='</div>';
+    return tl;
+  })():'')
++'<div class="info-grid"><div class="info-card"><div class="ic-title">Stage '+(m.stage+1)+' Tasks</div>'
   +tasks.map(function(t,i){return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="toggleTask(\''+m.id+'\','+m.stage+','+i+')">'
     +'<div style="width:18px;height:18px;border-radius:5px;'+(taskSt[i]?'background:var(--green)':'border:1.5px solid var(--border2)')+';flex-shrink:0;display:flex;align-items:center;justify-content:center">'
     +(taskSt[i]?'<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5 9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</div>'
     +'<span style="font-size:12.5px;color:'+(taskSt[i]?'var(--green)':'var(--text2)')+';"+(taskSt[i]?\'text-decoration:line-through;opacity:.65\':\'\')+">'+t+'</span></div>';}).join('')
   +(allDone&&m.stage<9?'<div style="margin-top:10px;padding:10px;background:var(--green-dim);border:1px solid rgba(34,197,94,.3);border-radius:8px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;color:var(--green);font-weight:500">All tasks complete!</span><button onclick="advanceFromTasks(\''+m.id+'\')" style="background:var(--green);color:#fff;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:11.5px;font-weight:500">Advance &#8594;</button></div>':'')
   +'</div><div class="info-card"><div class="ic-title">Project Overview</div>'
-  +[['Platform',m.platform],['ARR',m.arr+' Cr'],['SE Owner',m.owner||'&mdash;'],['Go-Live',m.d2||'TBD']].map(function(kv){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text2)">'+kv[0]+'</span><span style="font-size:12.5px;font-weight:600">'+kv[1]+'</span></div>';}).join('')
+  +(function(){
+    var rows=[['Platform',m.platform],['ARR',m.arr+' Cr'],['SE Owner',m.owner||'&mdash;'],['Go-Live',m.d2||'TBD']];
+    if(m.obManager)rows.push(['Onboarding Manager',m.obManager]);
+    if(m.salesManager)rows.push(['Sales Manager',m.salesManager]);
+    return rows.map(function(kv){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text2)">'+kv[0]+'</span><span style="font-size:12.5px;font-weight:600">'+kv[1]+'</span></div>';}).join('');
+  })()
   +'</div></div>'
-  +'<div class="info-card" style="margin-bottom:14px"><div class="ic-title" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><span>Notes &amp; Updates</span><button onclick="saveMerchantNote(\''+m.id+'\')" style="background:var(--acc);color:#fff;border:none;border-radius:6px;padding:5px 14px;font-size:12px;cursor:pointer;font-weight:500">Save</button></div>'
-  +(m.notes?(function(){var notes=parseNotes(m.notes);return notes.map(function(n,i){return '<div style="display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">'+'<div style="flex:1"><div style="font-size:10.5px;font-weight:600;color:var(--text3);margin-bottom:3px">'+n.date+'</div>'+'<div style="font-size:12.5px;color:var(--text2);line-height:1.6;white-space:pre-wrap">'+n.text+'</div></div>'+'<div style="display:flex;gap:4px;flex-shrink:0">'+'<button onclick="editNote(\''+m.id+'\','+i+')" class="ic-btn" title="Edit">'+'<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-7 7H2V9l7-7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>'+'<button onclick="deleteNote(\''+m.id+'\','+i+')" class="ic-btn" title="Delete" style="color:var(--acc)">'+'<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 3.5h9M5 3.5V2h3v1.5M4 3.5l.5 7h4l.5-7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+'</div></div>';}).join('')+'<div style="height:6px"></div>';})():'') 
-  +'<div id="note-edit-hint-'+m.id+'" style="display:none;font-size:11.5px;color:var(--amber);margin-bottom:6px;padding:6px 10px;background:var(--amber-dim);border-radius:6px;border:1px solid rgba(245,158,11,.3)">Editing note — update text and click Save</div>'+'<textarea id="merchant-note-input-'+m.id+'" class="fi" rows="3" placeholder="Add a note for your SE..." style="font-size:12.5px;resize:vertical"></textarea>'+'<div id="note-edit-idx-'+m.id+'" style="display:none"></div></div>'
-  +'<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--acc)">i</span><span>Your GoKwik SE will advance your stage once milestones are complete. Use <strong>KwikAssist AI</strong> for help.</span></div>';
+  +(function(){
+    var noteHtml='<div class="info-card" style="margin-bottom:14px">';
+    noteHtml+='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
+    noteHtml+='<span class="ic-title" style="margin-bottom:0">Notes &amp; Updates</span>';
+    noteHtml+='<button onclick="saveMerchantNote(\''+m.id+'\')" style="background:var(--acc);color:#fff;border:none;border-radius:6px;padding:5px 14px;font-size:12px;cursor:pointer;font-weight:500">Save</button>';
+    noteHtml+='</div>';
+    noteHtml+='<div style="display:flex;gap:6px;margin-bottom:12px">';
+    noteHtml+='<button id="nf-all-'+m.id+'" onclick="filterNotes(\''+m.id+'\',\'all\')" style="font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;cursor:pointer;background:var(--acc);color:#fff;border:none">All</button>';
+    noteHtml+='<button id="nf-merchant-'+m.id+'" onclick="filterNotes(\''+m.id+'\',\'merchant\')" style="font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;cursor:pointer;background:var(--bg4);color:var(--text2);border:1px solid var(--border2)">&#128200; Merchant</button>';
+    noteHtml+='<button id="nf-admin-'+m.id+'" onclick="filterNotes(\''+m.id+'\',\'admin\')" style="font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;cursor:pointer;background:var(--bg4);color:var(--text2);border:1px solid var(--border2)">&#9889; SE / Admin</button>';
+    noteHtml+='</div>';
+    noteHtml+='<div id="notes-list-'+m.id+'">';
+    if(m.notes){
+      var notes=parseNotes(m.notes);
+      if(notes.length){
+        notes.forEach(function(n,i){
+          var isAdmin=(n.author==='admin'||n.author==='se');
+          var badge=isAdmin
+            ?'<span style="background:rgba(59,130,246,.15);color:var(--blue);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid rgba(59,130,246,.25)">&#9889; SE</span>'
+            :'<span style="background:var(--acc-dim);color:var(--acc);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid rgba(232,24,77,.2)">&#128200; Merchant</span>';
+          noteHtml+='<div class="note-item" data-author="'+(n.author||'merchant')+'" style="padding:10px 0;border-bottom:1px solid var(--border)">';
+          noteHtml+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">'+badge;
+          noteHtml+='<span style="font-size:10.5px;color:var(--text3);margin-left:2px">'+n.date+'</span><div style="flex:1"></div>';
+          noteHtml+='<button onclick="editNote(\''+m.id+'\','+i+')" class="ic-btn" title="Edit"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-7 7H2V9l7-7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>';
+          noteHtml+='<button onclick="deleteNote(\''+m.id+'\','+i+')" class="ic-btn" title="Delete" style="color:var(--acc)"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 3.5h9M5 3.5V2h3v1.5M4 3.5l.5 7h4l.5-7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+          noteHtml+='</div><div style="font-size:12.5px;color:var(--text2);line-height:1.6;white-space:pre-wrap">'+n.text+'</div></div>';
+        });
+      } else {
+        noteHtml+='<div style="font-size:12.5px;color:var(--text3);font-style:italic;padding:8px 0">No notes yet.</div>';
+      }
+    } else {
+      noteHtml+='<div style="font-size:12.5px;color:var(--text3);font-style:italic;padding:8px 0">No notes yet.</div>';
+    }
+    noteHtml+='<div style="height:4px"></div></div>';
+    noteHtml+='<div id="note-edit-hint-'+m.id+'" style="display:none;font-size:11.5px;color:var(--amber);margin-bottom:6px;padding:6px 10px;background:var(--amber-dim);border-radius:6px;border:1px solid rgba(245,158,11,.3)">Editing note — update text and click Save</div>';
+    noteHtml+='<textarea id="merchant-note-input-'+m.id+'" class="fi" rows="3" placeholder="Add a note..." style="font-size:12.5px;resize:vertical"></textarea>';
+    noteHtml+='<div id="note-edit-idx-'+m.id+'" style="display:none"></div></div>';
+    return noteHtml;
+  })()
+  +'<div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--acc)">i</span><span>Your GoKwik SE will advance your stage once milestones are complete. Use <strong>KwikAssist AI</strong> for help.</span></div>'
+  +(user&&user.type==='admin'&&m.jiraLinks&&m.jiraLinks.length?(function(){
+    var h='<div class="info-card" style="margin-top:14px;margin-bottom:14px">';
+    h+='<div class="ic-title" style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span>JIRA Links</span><span style="background:var(--acc-dim);color:var(--acc);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px">Admin Only</span></div>';
+    m.jiraLinks.forEach(function(l){
+      h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border)">';
+      h+='<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2.5" fill="#0065ff"/><path d="M4 7h3m0 0l-1.5-1.5M7 7l-1.5 1.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/><path d="M7 4l3 3-3 3" stroke="#4da6ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      h+='<span style="font-size:12.5px;font-weight:600;color:var(--text2);min-width:80px">'+l.title+'</span>';
+      h+='<a href="'+l.url+'" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+l.url+'</a>';
+      h+='<button data-jurl="'+l.url+'" onclick="navigator.clipboard.writeText(this.dataset.jurl).then(function(){showToast(\'Copied!\');})" class="ic-btn" title="Copy URL"><svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 9V2h7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>';
+      h+='</div>';
+    });
+    h+='</div>';
+    return h;
+  })():'');
 }
 function renderCreds(m){var env=curEnv==='sandbox'?m.sb:m.prod;var lbl=curEnv==='sandbox'?'Sandbox Credentials':'Production Credentials';
   return '<div><div style="margin-bottom:14px"><div style="font-size:19px;font-weight:700;margin-bottom:2px">My Credentials</div><div style="font-size:12.5px;color:var(--text2)">Keep your App Secret secure.</div></div>'
@@ -1142,9 +1285,164 @@ function renderValidator(m){
     html+='<div><div style="font-size:13px;font-weight:600;margin-bottom:3px">'+s[1]+'</div><div style="font-size:12px;color:var(--text2)">'+s[2]+'</div></div></div>';
   });
   html+='</div>';
+
+  // ── Postman Collection Upload ──────────────────────────────────────────────
+  var hasCollection = m.validationCollection && m.validationCollection.length > 0;
+  var mid = m.id;
+
+  html+='<div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:14px">';
+  html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">';
+  html+='<div style="width:36px;height:36px;border-radius:9px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0">';
+  html+='<svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M3 13V4a1 1 0 011-1h6l3 3v7a1 1 0 01-1 1H4a1 1 0 01-1-1z" stroke="#F5A623" stroke-width="1.3"/><path d="M9 3v3h3" stroke="#F5A623" stroke-width="1.3"/><path d="M6 8h5M6 11h3" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/></svg></div>';
+  html+='<div style="flex:1"><div style="font-size:15px;font-weight:700">Submit Postman Collection</div>';
+  html+='<div style="font-size:12px;color:var(--text2);margin-top:2px">Upload your exported JSON — CE will download and validate from their end</div></div>';
+  if(hasCollection) html+='<span style="background:var(--green-dim);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(34,197,94,.3)">&#10003; Uploaded</span>';
+  html+='</div>';
+
+  if(hasCollection){
+    var collName = m.validationCollectionName || 'postman_collection.json';
+    html+='<div style="background:var(--bg4);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px">';
+    html+='<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="rgba(245,158,11,.1)"/><path d="M7 20V9a1 1 0 011-1h7l4 4v8a1 1 0 01-1 1H8a1 1 0 01-1-1z" stroke="#F5A623" stroke-width="1.3"/><path d="M15 8v4h4" stroke="#F5A623" stroke-width="1.3"/></svg>';
+    html+='<div style="flex:1"><div style="font-size:13px;font-weight:600">'+collName+'</div>';
+    html+='<div style="font-size:11.5px;color:var(--green);margin-top:2px">&#10003; Ready for CE download</div></div>';
+    html+='<a href="'+m.validationCollection+'" download="'+collName+'" class="btn btn-acc btn-sm" style="flex-shrink:0">&#128229; Download</a>';
+    html+='<button class="btn btn-out btn-sm" style="flex-shrink:0" onclick="vcUpload(\''+mid+'\')">&#8635; Replace</button>';
+    html+='</div>';
+  } else {
+    html+='<div class="vc-drop-zone" data-mid="'+mid+'" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed var(--border2);border-radius:10px;padding:28px;cursor:pointer;background:var(--bg4)" onclick="vcUpload(\''+mid+'\')">';
+    html+='<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 22v2a2 2 0 002 2h16a2 2 0 002-2v-2" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 6v14M10 12l6-6 6 6" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    html+='<div style="font-size:13.5px;font-weight:600;color:var(--text2)">Click to upload Postman JSON</div>';
+    html+='<div style="font-size:11.5px;color:var(--text3)">Export from Postman &rarr; Collection &rarr; Export as v2.1</div>';
+    html+='</div>';
+  }
+  html+='</div>';
+
+  // ── Validation Screenshots ────────────────────────────────────────────────
+  var shots = m.validationScreenshots || [];
+  html+='<div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px 24px">';
+  html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">';
+  html+='<div style="width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">';
+  html+='<svg width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="1" y="3" width="15" height="11" rx="2" stroke="#3b82f6" stroke-width="1.3"/><circle cx="6" cy="7.5" r="1.5" stroke="#3b82f6" stroke-width="1.2"/><path d="M1 11l4-3 3 3 2-2 4 3" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+  html+='<div style="flex:1"><div style="font-size:15px;font-weight:700">API Validation Screenshots</div>';
+  html+='<div style="font-size:12px;color:var(--text2);margin-top:2px">Screenshots from the validator — proof that each API passed</div></div>';
+  if(shots.length>0) html+='<span style="background:var(--green-dim);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(34,197,94,.3)">'+shots.length+' screenshot'+(shots.length>1?'s':'')+' uploaded</span>';
+  html+='</div>';
+
+  if(shots.length > 0){
+    html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:14px">';
+    shots.forEach(function(s,i){
+      html+='<div style="position:relative;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);background:var(--bg4);cursor:pointer" onclick="vsView(\''+mid+'\','+i+')">';
+      html+='<img src="'+s.data+'" style="width:100%;height:90px;object-fit:cover" alt="Shot '+(i+1)+'">';
+      html+='<div style="padding:5px 8px;font-size:10.5px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</div>';
+      html+='<button onclick="event.stopPropagation();vsDelete(\''+mid+'\','+i+')" style="position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(232,24,77,.9);border:none;color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center">&#215;</button>';
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+
+  html+='<div style="display:flex;align-items:center;gap:10px;border:2px dashed var(--border2);border-radius:10px;padding:14px 18px;cursor:pointer;background:var(--bg4)" onclick="vsUpload(\''+mid+'\')">';
+  html+='<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 16v1.5A1.5 1.5 0 004.5 19h13A1.5 1.5 0 0019 17.5V16" stroke="var(--text3)" stroke-width="1.4" stroke-linecap="round"/><path d="M11 3v12M6 8l5-5 5 5" stroke="var(--text3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  html+='<div><div style="font-size:13px;font-weight:600;color:var(--text2)">Add screenshots</div>';
+  html+='<div style="font-size:11px;color:var(--text3)">PNG, JPG supported &mdash; multiple at once</div></div>';
+  html+='</div>';
+  html+='</div>';
+
+  // Lightbox
+  html+='<div id="vs-lb" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.87);z-index:9999;align-items:center;justify-content:center;padding:20px" onclick="document.getElementById(\'vs-lb\').style.display=\'none\'">';
+  html+='<img id="vs-lb-img" style="max-width:90vw;max-height:88vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)">';
+  html+='<button onclick="document.getElementById(\'vs-lb\').style.display=\'none\'" style="position:fixed;top:14px;right:18px;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:22px;cursor:pointer;width:34px;height:34px;border-radius:50%">&#215;</button>';
+  html+='</div>';
+
   html+='</div>';
   return html;
 }
+
+
+function addJiraRow(title,url){
+  var c=document.getElementById('jira-rows-container');if(!c)return;
+  var idx=c.children.length;
+  var row=document.createElement('div');
+  row.style.cssText='display:flex;gap:6px;align-items:center';
+  row.innerHTML='<input class="fi" placeholder="Label (e.g. Bug, Epic)" style="width:35%;font-size:12px;padding:7px 10px" value="'+(title||'')+'">'
+    +'<input class="fi" placeholder="JIRA URL" style="flex:1;font-size:12px;padding:7px 10px" value="'+(url||'')+'">'
+    +'<button type="button" onclick="this.parentElement.remove()" style="width:30px;height:30px;border-radius:6px;background:var(--acc-dim);color:var(--acc);border:none;cursor:pointer;font-size:16px;flex-shrink:0">&#215;</button>';
+  c.appendChild(row);
+}
+function getJiraLinks(){
+  var c=document.getElementById('jira-rows-container');if(!c)return[];
+  var links=[];
+  Array.from(c.children).forEach(function(row){
+    var inputs=row.querySelectorAll('input');
+    var t=(inputs[0]&&inputs[0].value.trim())||'';
+    var u=(inputs[1]&&inputs[1].value.trim())||'';
+    if(u)links.push({title:t||u,url:u});
+  });
+  return links;
+}
+function populateJiraLinks(links){
+  var c=document.getElementById('jira-rows-container');if(!c)return;
+  c.innerHTML='';
+  (links||[]).forEach(function(l){addJiraRow(l.title,l.url);});
+}
+
+
+// Credential protection: only update if admin explicitly changed the value
+// If field is empty OR matches what was originally loaded → keep original
+function _protectCred(fieldId, origVal){
+  var v = document.getElementById(fieldId);
+  if(!v) return origVal || '';
+  var entered = v.value.trim();
+  // Empty → keep original
+  if(!entered) return origVal || '';
+  // Same as what was loaded → keep original (no accidental overwrite)
+  if(entered === (origVal || '')) return origVal || '';
+  // Different → admin intentionally changed it
+  return entered;
+}
+
+function vcUpload(mid){
+  var inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';
+  inp.onchange=function(){
+    var f=inp.files[0];if(!f)return;
+    if(f.size>10*1024*1024){showToast('Max 10MB');return;}
+    var r=new FileReader();r.onload=function(e){
+      var m=getM(mid);if(!m)return;
+      m.validationCollection=e.target.result;
+      m.validationCollectionName=f.name;
+      saveMerchants();showToast('Collection uploaded! CE can now download it.');
+      showTab('validator',document.getElementById('nav-validator'));
+    };r.readAsDataURL(f);
+  };inp.click();
+}
+function vsUpload(mid){
+  var inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.multiple=true;
+  inp.onchange=function(){
+    var files=Array.from(inp.files);if(!files.length)return;
+    var m=getM(mid);if(!m)return;
+    if(!m.validationScreenshots)m.validationScreenshots=[];
+    var loaded=0;
+    files.forEach(function(f){
+      if(f.size>5*1024*1024){showToast(f.name+' too large (max 5MB)');loaded++;if(loaded===files.length)finish();return;}
+      var r=new FileReader();
+      r.onload=function(e){m.validationScreenshots.push({data:e.target.result,name:f.name});loaded++;if(loaded===files.length)finish();};
+      r.readAsDataURL(f);
+    });
+    function finish(){saveMerchants();showToast(files.length+' screenshot'+(files.length>1?'s':'')+' added!');showTab('validator',document.getElementById('nav-validator'));}
+  };inp.click();
+}
+function vsDelete(mid,idx){
+  var m=getM(mid);if(!m||!m.validationScreenshots)return;
+  if(!confirm('Remove this screenshot?'))return;
+  m.validationScreenshots.splice(idx,1);
+  saveMerchants();showToast('Screenshot removed');
+  showTab('validator',document.getElementById('nav-validator'));
+}
+function vsView(mid,idx){
+  var m=getM(mid);if(!m||!m.validationScreenshots)return;
+  var lb=document.getElementById('vs-lb');var img=document.getElementById('vs-lb-img');
+  if(lb&&img){img.src=m.validationScreenshots[idx].data;lb.style.display='flex';}
+}
+
 function renderInlineAPIDocs(apiList){
   var AD={
     'get-cart':{p:'/get-cart',tag:'MANDATORY',tc:'tr',n:'Get Cart',
