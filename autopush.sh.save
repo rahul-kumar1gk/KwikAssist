@@ -1,3 +1,16 @@
-rahul.kumar@ip-192-168-1-2 KwikAssist %
-nano ~/KwikAssist/autopush.sh
+#!/bin/bash
+
+cd ~/KwikAssist
+
+fswatch -o . | while read f
+do
+  git add .
+  git commit -m "auto update $(date '+%Y-%m-%d %H:%M:%S')" >/dev/null 2>&1
+  git push >/dev/null 2>&1
+  echo "Auto pushed at $(date)"
+done
+
+chmod +x autopush.sh
+cd ~/KwikAssist
+code .
 
